@@ -1,0 +1,4692 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>BudgetBasics | Build Better Money Habits</title>
+
+<style>
+
+
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    background:#f8faf9;
+    color:#14251d;
+    line-height:1.6;
+    overflow-x:hidden;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+button,
+input{
+    font-family:inherit;
+}
+
+.container{
+    width:min(1180px,92%);
+    margin:auto;
+}
+
+
+/* =====================================================
+   SCROLL PROGRESS
+===================================================== */
+
+.scroll-progress{
+    position:fixed;
+    top:0;
+    left:0;
+    width:0%;
+    height:3px;
+    background:#20b66c;
+    z-index:9999;
+}
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+
+    background:rgba(255,255,255,.94);
+
+    backdrop-filter:blur(16px);
+
+    border-bottom:1px solid #e8eee9;
+
+    animation:navDrop .7s ease;
+}
+
+.navbar{
+    height:76px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:9px;
+
+    font-size:24px;
+    font-weight:800;
+
+    letter-spacing:-.8px;
+
+    transition:.3s ease;
+}
+
+.logo:hover{
+    transform:translateY(-2px);
+}
+
+.logo-mark{
+    width:38px;
+    height:38px;
+
+    border-radius:11px;
+
+    background:#0f5132;
+    color:white;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-weight:900;
+
+    box-shadow:
+        0 7px 18px rgba(15,81,50,.18);
+
+    transition:.3s ease;
+}
+
+.logo:hover .logo-mark{
+    transform:rotate(-8deg) scale(1.05);
+}
+
+.logo span{
+    color:#19a463;
+}
+
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:32px;
+}
+
+.nav-links a{
+    position:relative;
+
+    color:#56635c;
+    font-size:14px;
+    font-weight:600;
+
+    transition:.25s ease;
+}
+
+.nav-links a:not(.nav-action)::after{
+    content:"";
+
+    position:absolute;
+    left:0;
+    bottom:-7px;
+
+    width:0;
+    height:2px;
+
+    background:#19a463;
+
+    transition:.3s ease;
+}
+
+.nav-links a:not(.nav-action):hover::after{
+    width:100%;
+}
+
+.nav-links a:hover{
+    color:#15945a;
+}
+
+.nav-action{
+    padding:11px 19px;
+
+    border-radius:9px;
+
+    background:#0f5132;
+
+    color:white !important;
+
+    box-shadow:
+        0 7px 18px rgba(15,81,50,.13);
+
+    transition:.3s ease;
+}
+
+.nav-action:hover{
+    background:#19a463;
+
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 10px 23px rgba(15,81,50,.2);
+}
+
+.menu-btn{
+    display:none;
+
+    width:42px;
+    height:42px;
+
+    border:1px solid #e2e9e4;
+
+    background:white;
+
+    border-radius:9px;
+
+    font-size:20px;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.menu-btn:hover{
+    background:#eff9f3;
+    border-color:#bfe1cd;
+}
+
+
+
+
+.hero{
+    position:relative;
+
+    overflow:hidden;
+
+    padding:92px 0 85px;
+
+    background:
+        radial-gradient(
+            circle at 85% 20%,
+            rgba(31,175,101,.13),
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at 10% 80%,
+            rgba(31,175,101,.07),
+            transparent 30%
+        ),
+        #f8faf9;
+}
+
+.hero::before{
+    content:"";
+
+    position:absolute;
+
+    width:450px;
+    height:450px;
+
+    border:1px solid rgba(25,164,99,.08);
+
+    border-radius:50%;
+
+    right:-180px;
+    top:-180px;
+
+    animation:rotateSlow 25s linear infinite;
+}
+
+.hero::after{
+    content:"";
+
+    position:absolute;
+
+    width:280px;
+    height:280px;
+
+    border:1px solid rgba(25,164,99,.08);
+
+    border-radius:50%;
+
+    left:-150px;
+    bottom:-150px;
+
+    animation:rotateSlow 20s linear infinite reverse;
+}
+
+.hero-grid{
+    position:relative;
+    z-index:2;
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:80px;
+
+    align-items:center;
+}
+
+.hero-content{
+    animation:heroIn 1s cubic-bezier(.2,.8,.2,1);
+}
+
+.eyebrow{
+    display:inline-flex;
+
+    align-items:center;
+    gap:8px;
+
+    padding:7px 12px;
+
+    border:1px solid #cfe9da;
+
+    background:#effaf4;
+
+    color:#158653;
+
+    border-radius:30px;
+
+    font-size:12px;
+
+    font-weight:800;
+
+    letter-spacing:.3px;
+
+    margin-bottom:23px;
+
+    animation:
+        fadeDown .8s ease .1s both,
+        softPulse 3s ease-in-out 1.5s infinite;
+}
+
+.eyebrow-dot{
+    width:7px;
+    height:7px;
+
+    border-radius:50%;
+
+    background:#20b86c;
+
+    animation:dotPulse 2s ease-in-out infinite;
+}
+
+.hero h1{
+    max-width:650px;
+
+    font-size:clamp(45px,6vw,69px);
+
+    line-height:1.04;
+
+    letter-spacing:-3.5px;
+
+    color:#102d20;
+
+    margin-bottom:24px;
+
+    animation:
+        fadeUp .9s ease .15s both;
+}
+
+.hero h1 span{
+    color:#18a360;
+
+    display:inline-block;
+
+    animation:
+        textFloat 4s ease-in-out infinite;
+}
+
+.hero-description{
+    max-width:600px;
+
+    color:#68756e;
+
+    font-size:17px;
+
+    line-height:1.8;
+
+    margin-bottom:31px;
+
+    animation:
+        fadeUp .9s ease .3s both;
+}
+
+.hero-buttons{
+    display:flex;
+
+    gap:12px;
+
+    flex-wrap:wrap;
+
+    animation:
+        fadeUp .9s ease .45s both;
+}
+
+.btn{
+    display:inline-flex;
+
+    align-items:center;
+    justify-content:center;
+
+    gap:9px;
+
+    min-height:48px;
+
+    padding:0 21px;
+
+    border-radius:9px;
+
+    font-size:14px;
+
+    font-weight:750;
+
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease,
+        background .3s ease,
+        color .3s ease;
+}
+
+.btn-primary{
+    position:relative;
+
+    overflow:hidden;
+
+    background:#0f5132;
+
+    color:white;
+
+    box-shadow:
+        0 9px 22px rgba(15,81,50,.15);
+}
+
+.btn-primary::before{
+    content:"";
+
+    position:absolute;
+
+    width:0;
+    height:0;
+
+    background:rgba(255,255,255,.15);
+
+    border-radius:50%;
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    transition:
+        width .5s ease,
+        height .5s ease;
+}
+
+.btn-primary:hover::before{
+    width:300px;
+    height:300px;
+}
+
+.btn-primary:hover{
+    background:#18a360;
+
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 14px 28px rgba(15,81,50,.2);
+}
+
+.btn-primary span{
+    transition:.3s;
+}
+
+.btn-primary:hover span{
+    transform:translateX(5px);
+}
+
+.btn-secondary{
+    background:white;
+
+    color:#244337;
+
+    border:1px solid #dce6df;
+}
+
+.btn-secondary:hover{
+    border-color:#19a463;
+
+    color:#168b54;
+
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 10px 25px rgba(20,70,45,.07);
+}
+
+.hero-note{
+    display:flex;
+
+    align-items:center;
+
+    gap:9px;
+
+    margin-top:25px;
+
+    color:#7a857f;
+
+    font-size:12px;
+
+    animation:
+        fadeUp .9s ease .6s both;
+}
+
+.hero-note-icon{
+    width:23px;
+    height:23px;
+
+    border-radius:50%;
+
+    background:#e3f5ea;
+
+    color:#15945a;
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    font-size:12px;
+
+    animation:
+        checkPulse 2.5s ease-in-out infinite;
+}
+
+
+.dashboard-wrapper{
+    position:relative;
+
+    min-height:510px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    animation:
+        fadeIn 1.2s ease .2s both;
+}
+
+.dashboard{
+    width:410px;
+    max-width:100%;
+
+    background:white;
+
+    border:1px solid #e3ebe5;
+
+    border-radius:21px;
+
+    padding:22px;
+
+    box-shadow:
+        0 35px 80px rgba(18,55,38,.12),
+        0 5px 15px rgba(18,55,38,.05);
+
+    transform:rotate(1.5deg);
+
+    animation:
+        dashboardFloat 5s ease-in-out infinite;
+}
+
+.dashboard:hover{
+    animation-play-state:paused;
+
+    transform:
+        rotate(0deg)
+        scale(1.02);
+
+    box-shadow:
+        0 40px 90px rgba(18,55,38,.16);
+}
+
+.dashboard-header{
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    margin-bottom:22px;
+}
+
+.dashboard-title{
+    font-size:12px;
+    color:#7b867f;
+
+    margin-bottom:2px;
+}
+
+.dashboard-header h3{
+    font-size:18px;
+    color:#143526;
+}
+
+.dashboard-menu{
+    width:35px;
+    height:35px;
+
+    border-radius:9px;
+
+    background:#eff7f2;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    color:#168e55;
+
+    animation:
+        menuRotate 4s ease-in-out infinite;
+}
+
+.balance-box{
+    background:#103b27;
+
+    color:white;
+
+    border-radius:15px;
+
+    padding:21px;
+
+    margin-bottom:17px;
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+.balance-box::before{
+    content:"";
+
+    position:absolute;
+
+    width:130px;
+    height:130px;
+
+    border-radius:50%;
+
+    background:rgba(65,217,143,.07);
+
+    right:-45px;
+    top:-55px;
+
+    animation:
+        floatCircle 4s ease-in-out infinite;
+}
+
+.balance-label{
+    color:#a9c0b4;
+
+    font-size:11px;
+}
+
+.balance-amount{
+    font-size:31px;
+
+    font-weight:800;
+
+    letter-spacing:-1px;
+
+    margin:2px 0 7px;
+
+    animation:
+        numberGlow 3s ease-in-out infinite;
+}
+
+.balance-change{
+    display:inline-flex;
+
+    gap:5px;
+
+    align-items:center;
+
+    background:rgba(42,201,119,.14);
+
+    color:#59dd96;
+
+    border-radius:6px;
+
+    padding:4px 7px;
+
+    font-size:10px;
+
+    font-weight:700;
+}
+
+.chart{
+    height:75px;
+
+    margin-top:16px;
+
+    display:flex;
+
+    align-items:flex-end;
+
+    gap:7px;
+}
+
+.bar{
+    flex:1;
+
+    background:#38c87d;
+
+    border-radius:5px 5px 2px 2px;
+
+    opacity:.85;
+
+    transform-origin:bottom;
+
+    animation:
+        barGrow 1.2s cubic-bezier(.2,.8,.2,1) both;
+}
+
+.bar:nth-child(1){
+    height:35%;
+    animation-delay:.4s;
+}
+
+.bar:nth-child(2){
+    height:50%;
+    animation-delay:.5s;
+}
+
+.bar:nth-child(3){
+    height:43%;
+    animation-delay:.6s;
+}
+
+.bar:nth-child(4){
+    height:68%;
+    animation-delay:.7s;
+}
+
+.bar:nth-child(5){
+    height:58%;
+    animation-delay:.8s;
+}
+
+.bar:nth-child(6){
+    height:81%;
+    animation-delay:.9s;
+}
+
+.bar:nth-child(7){
+    height:72%;
+    animation-delay:1s;
+}
+
+.dashboard-section-title{
+    display:flex;
+
+    justify-content:space-between;
+
+    margin:18px 0 10px;
+}
+
+.dashboard-section-title strong{
+    font-size:12px;
+
+    color:#263e32;
+}
+
+.dashboard-section-title span{
+    color:#89948e;
+
+    font-size:10px;
+}
+
+.transaction{
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:11px 0;
+
+    border-bottom:1px solid #edf1ee;
+
+    transition:.3s ease;
+}
+
+.transaction:hover{
+    padding-left:6px;
+    padding-right:6px;
+
+    background:#fafcfb;
+
+    border-radius:8px;
+}
+
+.transaction-left{
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+}
+
+.transaction-icon{
+    width:34px;
+    height:34px;
+
+    border-radius:9px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:#f0f7f3;
+
+    transition:.3s;
+}
+
+.transaction:hover .transaction-icon{
+    transform:scale(1.12) rotate(-5deg);
+}
+
+.transaction-name{
+    color:#30473c;
+
+    font-size:11px;
+
+    font-weight:700;
+}
+
+.transaction-date{
+    color:#98a19c;
+
+    font-size:9px;
+}
+
+.transaction-amount{
+    font-size:11px;
+
+    font-weight:800;
+
+    color:#273d33;
+}
+
+
+/* Floating cards */
+
+.floating-card{
+    position:absolute;
+
+    background:white;
+
+    border:1px solid #e5ece7;
+
+    border-radius:13px;
+
+    padding:13px;
+
+    box-shadow:
+        0 18px 45px rgba(17,56,38,.11);
+
+    z-index:2;
+
+    transition:.3s ease;
+}
+
+.floating-card:hover{
+    transform:scale(1.06) !important;
+
+    box-shadow:
+        0 25px 55px rgba(17,56,38,.16);
+}
+
+.floating-card.goal{
+    left:-10px;
+    top:80px;
+
+    animation:
+        floatOne 4s ease-in-out infinite;
+}
+
+.floating-card.score{
+    right:-10px;
+    bottom:72px;
+
+    animation:
+        floatTwo 4.5s ease-in-out infinite;
+}
+
+.float-top{
+    display:flex;
+
+    gap:9px;
+
+    align-items:center;
+}
+
+.float-icon{
+    width:34px;
+    height:34px;
+
+    border-radius:9px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    background:#eaf8f0;
+
+    animation:
+        iconBounce 2.5s ease-in-out infinite;
+}
+
+.float-text strong{
+    display:block;
+
+    color:#18382a;
+
+    font-size:11px;
+}
+
+.float-text small{
+    color:#8b9690;
+
+    font-size:9px;
+}
+
+.mini-progress{
+    width:105px;
+
+    height:5px;
+
+    background:#e9efeb;
+
+    border-radius:10px;
+
+    margin-top:10px;
+
+    overflow:hidden;
+}
+
+.mini-progress div{
+    height:100%;
+
+    width:74%;
+
+    background:#19a463;
+
+    border-radius:10px;
+
+    transform-origin:left;
+
+    animation:
+        progressGrow 1.5s ease 1s both;
+}
+
+.score-circle{
+    width:36px;
+    height:36px;
+
+    border-radius:50%;
+
+    border:4px solid #dff3e7;
+
+    border-top-color:#19a463;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:9px;
+
+    font-weight:800;
+
+    color:#153c2b;
+
+    animation:
+        scoreSpin 3s linear infinite;
+}
+
+
+/* =====================================================
+   TRUST STRIP
+===================================================== */
+
+.trust{
+    background:white;
+
+    border-top:1px solid #edf1ee;
+
+    border-bottom:1px solid #edf1ee;
+
+    padding:24px 0;
+}
+
+.trust-content{
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:35px;
+
+    flex-wrap:wrap;
+}
+
+.trust-text{
+    color:#8a958f;
+
+    font-size:11px;
+
+    font-weight:700;
+}
+
+.trust-item{
+    color:#59675f;
+
+    font-size:12px;
+
+    font-weight:750;
+
+    display:flex;
+
+    gap:7px;
+
+    align-items:center;
+
+    transition:.3s;
+}
+
+.trust-item:hover{
+    color:#15965b;
+
+    transform:translateY(-3px);
+}
+
+
+/* =====================================================
+   SECTIONS
+===================================================== */
+
+.section{
+    padding:105px 0;
+}
+
+.section-header{
+    max-width:650px;
+
+    margin:0 auto 52px;
+
+    text-align:center;
+}
+
+.section-label{
+    color:#15965b;
+
+    font-size:11px;
+
+    text-transform:uppercase;
+
+    letter-spacing:1.8px;
+
+    font-weight:850;
+
+    position:relative;
+}
+
+.section-label::after{
+    content:"";
+
+    display:block;
+
+    width:30px;
+    height:2px;
+
+    background:#20b66c;
+
+    margin:9px auto 0;
+
+    transform-origin:center;
+
+    animation:
+        lineGrow 2s ease-in-out infinite;
+}
+
+.section-header h2{
+    color:#112f21;
+
+    font-size:42px;
+
+    line-height:1.12;
+
+    letter-spacing:-1.6px;
+
+    margin:11px 0 14px;
+}
+
+.section-header p{
+    color:#6c7871;
+
+    font-size:15px;
+}
+
+
+/* =====================================================
+   FEATURE CARDS
+===================================================== */
+
+.features{
+    background:#fff;
+}
+
+.feature-grid{
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:17px;
+}
+
+.feature-card{
+    position:relative;
+
+    overflow:hidden;
+
+    padding:28px 24px;
+
+    border:1px solid #e4ebe6;
+
+    border-radius:15px;
+
+    background:white;
+
+    transition:
+        transform .4s cubic-bezier(.2,.8,.2,1),
+        box-shadow .4s ease,
+        border-color .3s ease;
+}
+
+.feature-card::before{
+    content:"";
+
+    position:absolute;
+
+    width:100px;
+    height:100px;
+
+    border-radius:50%;
+
+    background:#effaf4;
+
+    right:-60px;
+    top:-60px;
+
+    transition:.5s ease;
+}
+
+.feature-card:hover::before{
+    width:180px;
+    height:180px;
+}
+
+.feature-card:hover{
+    transform:
+        translateY(-9px)
+        scale(1.015);
+
+    border-color:#c8e4d3;
+
+    box-shadow:
+        0 20px 48px rgba(20,70,45,.09);
+}
+
+.feature-icon{
+    position:relative;
+
+    width:48px;
+    height:48px;
+
+    border-radius:12px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    background:#edf9f2;
+
+    color:#15965b;
+
+    font-size:21px;
+
+    margin-bottom:20px;
+
+    transition:.4s cubic-bezier(.2,.8,.2,1);
+}
+
+.feature-card:hover .feature-icon{
+    transform:
+        rotate(-7deg)
+        scale(1.1);
+
+    background:#19a463;
+
+    color:white;
+}
+
+.feature-card h3{
+    position:relative;
+
+    color:#173729;
+
+    font-size:17px;
+
+    margin-bottom:8px;
+}
+
+.feature-card p{
+    position:relative;
+
+    color:#758079;
+
+    font-size:13px;
+
+    line-height:1.7;
+}
+
+
+/* =====================================================
+   LEARNING
+===================================================== */
+
+.learning{
+    background:#f8faf9;
+}
+
+.learning-grid{
+    display:grid;
+
+    grid-template-columns:.85fr 1.15fr;
+
+    gap:75px;
+
+    align-items:center;
+}
+
+.learning-copy .section-label{
+    display:block;
+
+    margin-bottom:10px;
+}
+
+.learning-copy h2{
+    color:#112f21;
+
+    font-size:42px;
+
+    line-height:1.13;
+
+    letter-spacing:-1.5px;
+
+    margin-bottom:18px;
+}
+
+.learning-copy p{
+    color:#69766f;
+
+    font-size:15px;
+
+    line-height:1.8;
+
+    margin-bottom:26px;
+}
+
+.learning-list{
+    display:flex;
+
+    flex-direction:column;
+
+    gap:12px;
+}
+
+.learning-list div{
+    display:flex;
+
+    align-items:center;
+
+    gap:11px;
+
+    color:#415149;
+
+    font-size:13px;
+
+    font-weight:650;
+
+    transition:.3s;
+}
+
+.learning-list div:hover{
+    transform:translateX(6px);
+
+    color:#15965b;
+}
+
+.check{
+    width:24px;
+    height:24px;
+
+    flex-shrink:0;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:#ddf5e6;
+
+    color:#139359;
+
+    font-size:12px;
+
+    font-weight:900;
+
+    transition:.3s;
+}
+
+.learning-list div:hover .check{
+    background:#19a463;
+    color:white;
+
+    transform:rotate(360deg);
+}
+
+.lesson-grid{
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:15px;
+}
+
+.lesson-card{
+    padding:23px;
+
+    background:white;
+
+    border:1px solid #e4ebe6;
+
+    border-radius:15px;
+
+    transition:.4s ease;
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+.lesson-card::after{
+    content:"";
+
+    position:absolute;
+
+    width:5px;
+    height:0;
+
+    left:0;
+    bottom:0;
+
+    background:#19a463;
+
+    transition:.4s ease;
+}
+
+.lesson-card:hover::after{
+    height:100%;
+}
+
+.lesson-card:hover{
+    transform:
+        translateY(-6px)
+        translateX(2px);
+
+    box-shadow:
+        0 17px 40px rgba(20,70,45,.08);
+}
+
+.lesson-number{
+    color:#19a463;
+
+    font-size:10px;
+
+    font-weight:900;
+
+    letter-spacing:1px;
+}
+
+.lesson-card h3{
+    color:#193b2b;
+
+    font-size:16px;
+
+    margin:8px 0;
+}
+
+.lesson-card p{
+    color:#77827c;
+
+    font-size:12px;
+
+    line-height:1.7;
+}
+
+
+/* =====================================================
+   STATS
+===================================================== */
+
+.stats{
+    background:#0e3925;
+
+    color:white;
+
+    padding:70px 0;
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+.stats::before,
+.stats::after{
+    content:"";
+
+    position:absolute;
+
+    border:1px solid rgba(255,255,255,.05);
+
+    border-radius:50%;
+
+    animation:
+        rotateSlow 20s linear infinite;
+}
+
+.stats::before{
+    width:300px;
+    height:300px;
+
+    left:-160px;
+    top:-160px;
+}
+
+.stats::after{
+    width:250px;
+    height:250px;
+
+    right:-130px;
+    bottom:-140px;
+
+    animation-direction:reverse;
+}
+
+.stats-grid{
+    position:relative;
+    z-index:2;
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+}
+
+.stat{
+    text-align:center;
+
+    border-right:1px solid rgba(255,255,255,.1);
+
+    transition:.3s;
+}
+
+.stat:hover{
+    transform:translateY(-5px);
+}
+
+.stat:last-child{
+    border:0;
+}
+
+.stat strong{
+    display:block;
+
+    font-size:36px;
+
+    letter-spacing:-1px;
+
+    color:#51d991;
+
+    animation:
+        numberFloat 3s ease-in-out infinite;
+}
+
+.stat:nth-child(2) strong{
+    animation-delay:.3s;
+}
+
+.stat:nth-child(3) strong{
+    animation-delay:.6s;
+}
+
+.stat:nth-child(4) strong{
+    animation-delay:.9s;
+}
+
+.stat span{
+    color:#aec0b6;
+
+    font-size:11px;
+}
+
+
+/* =====================================================
+   AI SECTION
+===================================================== */
+
+.ai-section{
+    background:white;
+}
+
+.ai-panel{
+    background:#f1faf5;
+
+    border:1px solid #d9eee1;
+
+    border-radius:22px;
+
+    padding:50px;
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:60px;
+
+    align-items:center;
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+.ai-panel::before{
+    content:"";
+
+    position:absolute;
+
+    width:260px;
+    height:260px;
+
+    border-radius:50%;
+
+    border:1px solid rgba(25,164,99,.08);
+
+    right:-100px;
+    top:-120px;
+
+    animation:
+        rotateSlow 18s linear infinite;
+}
+
+.ai-copy{
+    position:relative;
+    z-index:2;
+}
+
+.ai-badge{
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    color:#15945a;
+
+    font-size:11px;
+
+    font-weight:800;
+
+    text-transform:uppercase;
+
+    letter-spacing:1.3px;
+}
+
+.ai-badge-dot{
+    width:7px;
+    height:7px;
+
+    border-radius:50%;
+
+    background:#1bb66a;
+
+    animation:
+        dotPulse 2s ease-in-out infinite;
+}
+
+.ai-copy h2{
+    color:#102f20;
+
+    font-size:38px;
+
+    line-height:1.15;
+
+    letter-spacing:-1.2px;
+
+    margin:10px 0 14px;
+}
+
+.ai-copy p{
+    color:#6c7871;
+
+    font-size:14px;
+
+    line-height:1.8;
+
+    max-width:480px;
+}
+
+.ai-preview{
+    position:relative;
+    z-index:2;
+
+    background:white;
+
+    border:1px solid #e0ebe4;
+
+    border-radius:17px;
+
+    overflow:hidden;
+
+    box-shadow:
+        0 20px 45px rgba(20,70,45,.08);
+
+    animation:
+        previewFloat 4s ease-in-out infinite;
+}
+
+.ai-preview:hover{
+    animation-play-state:paused;
+
+    transform:translateY(-5px);
+}
+
+.ai-preview-head{
+    padding:14px 16px;
+
+    background:#103b27;
+
+    color:white;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+}
+
+.ai-avatar{
+    width:33px;
+    height:33px;
+
+    border-radius:9px;
+
+    background:#20b86d;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    animation:
+        avatarPulse 2.5s ease-in-out infinite;
+}
+
+.ai-preview-head strong{
+    display:block;
+
+    font-size:11px;
+}
+
+.ai-preview-head small{
+    display:block;
+
+    color:#a7c1b3;
+
+    font-size:9px;
+}
+
+.ai-preview-body{
+    padding:17px;
+}
+
+.preview-message{
+    width:80%;
+
+    padding:10px 12px;
+
+    border-radius:11px;
+
+    background:#f2f6f3;
+
+    color:#526058;
+
+    font-size:11px;
+
+    margin-bottom:11px;
+
+    animation:
+        messageIn .6s ease both;
+}
+
+.preview-message.user{
+    margin-left:auto;
+
+    background:#19a463;
+
+    color:white;
+
+    animation-delay:.2s;
+}
+
+.ai-suggestions{
+    display:flex;
+
+    gap:7px;
+
+    flex-wrap:wrap;
+
+    margin-top:15px;
+}
+
+.ai-suggestions span{
+    border:1px solid #dce8df;
+
+    border-radius:20px;
+
+    padding:6px 9px;
+
+    font-size:9px;
+
+    color:#607069;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.ai-suggestions span:hover{
+    background:#19a463;
+
+    color:white;
+
+    border-color:#19a463;
+
+    transform:translateY(-2px);
+}
+
+
+/* =====================================================
+   CTA
+===================================================== */
+
+.cta{
+    padding:95px 0;
+
+    background:#f8faf9;
+}
+
+.cta-box{
+    background:#0f5132;
+
+    border-radius:22px;
+
+    padding:65px 30px;
+
+    text-align:center;
+
+    position:relative;
+
+    overflow:hidden;
+
+    animation:
+        ctaGlow 4s ease-in-out infinite;
+}
+
+.cta-box::before{
+    content:"";
+
+    position:absolute;
+
+    width:300px;
+    height:300px;
+
+    border-radius:50%;
+
+    background:rgba(52,207,126,.1);
+
+    top:-170px;
+    right:-70px;
+
+    animation:
+        floatCircle 5s ease-in-out infinite;
+}
+
+.cta-box::after{
+    content:"";
+
+    position:absolute;
+
+    width:220px;
+    height:220px;
+
+    border:1px solid rgba(255,255,255,.06);
+
+    border-radius:50%;
+
+    left:-120px;
+    bottom:-120px;
+
+    animation:
+        rotateSlow 15s linear infinite;
+}
+
+.cta-box h2{
+    position:relative;
+    z-index:2;
+
+    color:white;
+
+    font-size:41px;
+
+    line-height:1.15;
+
+    letter-spacing:-1.3px;
+
+    margin-bottom:14px;
+}
+
+.cta-box p{
+    position:relative;
+    z-index:2;
+
+    max-width:570px;
+
+    margin:0 auto 27px;
+
+    color:#bdd0c5;
+
+    font-size:14px;
+}
+
+.cta-box .btn{
+    position:relative;
+    z-index:2;
+
+    background:#39cf82;
+
+    color:#0b3924;
+}
+
+.cta-box .btn:hover{
+    background:white;
+
+    transform:
+        translateY(-4px)
+        scale(1.02);
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer{
+    background:#092a1b;
+
+    color:white;
+
+    padding:70px 0 25px;
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+footer::before{
+    content:"";
+
+    position:absolute;
+
+    width:400px;
+    height:400px;
+
+    border-radius:50%;
+
+    border:1px solid rgba(255,255,255,.025);
+
+    right:-200px;
+    top:-200px;
+
+    animation:
+        rotateSlow 25s linear infinite;
+}
+
+.footer-grid{
+    position:relative;
+    z-index:2;
+
+    display:grid;
+
+    grid-template-columns:1.25fr .7fr .7fr 1.25fr;
+
+    gap:50px;
+
+    padding-bottom:50px;
+}
+
+.footer-brand .logo{
+    color:white;
+
+    margin-bottom:16px;
+}
+
+.footer-brand p{
+    max-width:300px;
+
+    color:#91a89b;
+
+    font-size:12px;
+
+    line-height:1.8;
+}
+
+.footer-heading{
+    font-size:12px;
+
+    margin-bottom:17px;
+
+    color:white;
+}
+
+.footer-links a{
+    display:block;
+
+    color:#8fa499;
+
+    font-size:12px;
+
+    margin:10px 0;
+
+    transition:.25s;
+}
+
+.footer-links a:hover{
+    color:#43d98e;
+
+    transform:translateX(4px);
+}
+
+
+/* Footer AI */
+
+.footer-ai{
+    background:#103925;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:14px;
+
+    padding:17px;
+
+    transition:.3s ease;
+}
+
+.footer-ai:hover{
+    border-color:rgba(48,210,129,.35);
+
+    transform:translateY(-4px);
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.15);
+}
+
+.footer-ai-title{
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    margin-bottom:8px;
+}
+
+.online-dot{
+    width:7px;
+    height:7px;
+
+    border-radius:50%;
+
+    background:#38d888;
+
+    box-shadow:
+        0 0 0 4px rgba(56,216,136,.09);
+
+    animation:
+        dotPulse 2s ease-in-out infinite;
+}
+
+.footer-ai-title strong{
+    font-size:12px;
+}
+
+.footer-ai p{
+    color:#91a89b;
+
+    font-size:10px;
+
+    line-height:1.6;
+
+    margin-bottom:12px;
+}
+
+.footer-ai-input{
+    display:flex;
+
+    background:#082a1b;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:8px;
+
+    overflow:hidden;
+
+    transition:.3s;
+}
+
+.footer-ai-input:focus-within{
+    border-color:#20b66c;
+
+    box-shadow:
+        0 0 0 3px rgba(32,182,108,.08);
+}
+
+.footer-ai-input input{
+    width:100%;
+
+    min-width:0;
+
+    border:0;
+
+    outline:0;
+
+    background:transparent;
+
+    color:white;
+
+    padding:10px;
+
+    font-size:10px;
+}
+
+.footer-ai-input button{
+    border:0;
+
+    background:#19a463;
+
+    color:white;
+
+    padding:0 13px;
+
+    cursor:pointer;
+
+    transition:.25s;
+}
+
+.footer-ai-input button:hover{
+    background:#35cf82;
+
+    transform:scale(1.05);
+}
+
+.footer-bottom{
+    position:relative;
+    z-index:2;
+
+    border-top:1px solid rgba(255,255,255,.08);
+
+    padding-top:22px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:20px;
+
+    color:#71887c;
+
+    font-size:10px;
+}
+
+
+/* =====================================================
+   FLOATING CHAT
+===================================================== */
+
+.chat-toggle{
+    position:fixed;
+
+    right:25px;
+    bottom:25px;
+
+    width:57px;
+    height:57px;
+
+    border:0;
+
+    border-radius:50%;
+
+    background:#19a463;
+
+    color:white;
+
+    cursor:pointer;
+
+    z-index:2000;
+
+    font-size:22px;
+
+    box-shadow:
+        0 12px 30px rgba(15,81,50,.3);
+
+    transition:.3s;
+
+    animation:
+        chatFloat 3s ease-in-out infinite;
+}
+
+.chat-toggle::before{
+    content:"";
+
+    position:absolute;
+
+    inset:-7px;
+
+    border:2px solid rgba(25,164,99,.2);
+
+    border-radius:50%;
+
+    animation:
+        chatRing 2s ease-out infinite;
+}
+
+.chat-toggle:hover{
+    transform:scale(1.1);
+
+    background:#0f5132;
+}
+
+.chat-window{
+    position:fixed;
+
+    right:25px;
+    bottom:92px;
+
+    width:360px;
+
+    max-width:calc(100% - 30px);
+
+    background:white;
+
+    border:1px solid #e1e9e3;
+
+    border-radius:17px;
+
+    overflow:hidden;
+
+    box-shadow:
+        0 25px 70px rgba(0,0,0,.18);
+
+    z-index:2100;
+
+    display:none;
+}
+
+.chat-window.active{
+    display:block;
+
+    animation:
+        chatIn .3s cubic-bezier(.2,.8,.2,1);
+}
+
+.chat-head{
+    background:#103b27;
+
+    color:white;
+
+    padding:15px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+}
+
+.chat-profile{
+    display:flex;
+
+    align-items:center;
+
+    gap:9px;
+}
+
+.chat-profile-icon{
+    width:37px;
+    height:37px;
+
+    border-radius:10px;
+
+    background:#20b86d;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    animation:
+        avatarPulse 2.5s ease-in-out infinite;
+}
+
+.chat-profile strong{
+    display:block;
+
+    font-size:12px;
+}
+
+.chat-profile small{
+    color:#a5bdb0;
+
+    font-size:9px;
+}
+
+.close-chat{
+    border:0;
+
+    background:transparent;
+
+    color:white;
+
+    cursor:pointer;
+
+    font-size:22px;
+
+    transition:.3s;
+}
+
+.close-chat:hover{
+    transform:rotate(90deg);
+
+    color:#48db91;
+}
+
+.chat-messages{
+    height:310px;
+
+    padding:15px;
+
+    overflow-y:auto;
+
+    background:#f7faf8;
+}
+
+.chat-message{
+    max-width:84%;
+
+    padding:10px 12px;
+
+    border-radius:11px;
+
+    font-size:11px;
+
+    margin-bottom:10px;
+
+    animation:
+        messageIn .3s ease both;
+}
+
+.chat-message.bot{
+    background:white;
+
+    border:1px solid #e5ebe7;
+
+    color:#4d5c54;
+}
+
+.chat-message.user{
+    margin-left:auto;
+
+    background:#19a463;
+
+    color:white;
+}
+
+.chat-input{
+    display:flex;
+
+    padding:10px;
+
+    border-top:1px solid #e5ebe7;
+
+    background:white;
+}
+
+.chat-input input{
+    flex:1;
+
+    min-width:0;
+
+    border:1px solid #dce5df;
+
+    border-right:0;
+
+    outline:0;
+
+    padding:10px;
+
+    border-radius:8px 0 0 8px;
+
+    font-size:11px;
+
+    transition:.3s;
+}
+
+.chat-input input:focus{
+    border-color:#19a463;
+}
+
+.chat-input button{
+    border:0;
+
+    padding:0 14px;
+
+    background:#19a463;
+
+    color:white;
+
+    border-radius:0 8px 8px 0;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.chat-input button:hover{
+    background:#0f5132;
+}
+
+
+/* =====================================================
+   REVEAL ANIMATION
+===================================================== */
+
+.reveal{
+    opacity:0;
+
+    transform:translateY(35px);
+
+    transition:
+        opacity .8s ease,
+        transform .8s cubic-bezier(.2,.8,.2,1);
+}
+
+.reveal.active{
+    opacity:1;
+
+    transform:translateY(0);
+}
+
+.reveal-left{
+    opacity:0;
+
+    transform:translateX(-40px);
+
+    transition:
+        opacity .8s ease,
+        transform .8s cubic-bezier(.2,.8,.2,1);
+}
+
+.reveal-left.active{
+    opacity:1;
+
+    transform:translateX(0);
+}
+
+.reveal-right{
+    opacity:0;
+
+    transform:translateX(40px);
+
+    transition:
+        opacity .8s ease,
+        transform .8s cubic-bezier(.2,.8,.2,1);
+}
+
+.reveal-right.active{
+    opacity:1;
+
+    transform:translateX(0);
+}
+
+
+/* =====================================================
+   KEYFRAMES
+===================================================== */
+
+@keyframes navDrop{
+
+    from{
+        opacity:0;
+        transform:translateY(-20px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+@keyframes heroIn{
+
+    from{
+        opacity:0;
+        transform:translateY(35px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+@keyframes fadeUp{
+
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+@keyframes fadeDown{
+
+    from{
+        opacity:0;
+        transform:translateY(-12px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+@keyframes fadeIn{
+
+    from{
+        opacity:0;
+    }
+
+    to{
+        opacity:1;
+    }
+
+}
+
+@keyframes dashboardFloat{
+
+    0%,100%{
+        transform:
+            rotate(1.5deg)
+            translateY(0);
+    }
+
+    50%{
+        transform:
+            rotate(1.5deg)
+            translateY(-11px);
+    }
+
+}
+
+@keyframes floatOne{
+
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-12px);
+    }
+
+}
+
+@keyframes floatTwo{
+
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(9px);
+    }
+
+}
+
+@keyframes rotateSlow{
+
+    from{
+        transform:rotate(0deg);
+    }
+
+    to{
+        transform:rotate(360deg);
+    }
+
+}
+
+@keyframes dotPulse{
+
+    0%,100%{
+        transform:scale(1);
+        box-shadow:0 0 0 0 rgba(32,182,108,.35);
+    }
+
+    50%{
+        transform:scale(1.25);
+        box-shadow:0 0 0 7px rgba(32,182,108,0);
+    }
+
+}
+
+@keyframes softPulse{
+
+    0%,100%{
+        box-shadow:0 0 0 rgba(25,164,99,0);
+    }
+
+    50%{
+        box-shadow:0 5px 25px rgba(25,164,99,.08);
+    }
+
+}
+
+@keyframes textFloat{
+
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-3px);
+    }
+
+}
+
+@keyframes checkPulse{
+
+    0%,100%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.15);
+    }
+
+}
+
+@keyframes menuRotate{
+
+    0%,100%{
+        transform:rotate(0deg);
+    }
+
+    50%{
+        transform:rotate(8deg);
+    }
+
+}
+
+@keyframes numberGlow{
+
+    0%,100%{
+        text-shadow:0 0 0 rgba(81,217,145,0);
+    }
+
+    50%{
+        text-shadow:0 0 15px rgba(81,217,145,.15);
+    }
+
+}
+
+@keyframes barGrow{
+
+    from{
+        transform:scaleY(0);
+    }
+
+    to{
+        transform:scaleY(1);
+    }
+
+}
+
+@keyframes progressGrow{
+
+    from{
+        transform:scaleX(0);
+    }
+
+    to{
+        transform:scaleX(1);
+    }
+
+}
+
+@keyframes scoreSpin{
+
+    0%{
+        transform:rotate(0deg);
+    }
+
+    100%{
+        transform:rotate(360deg);
+    }
+
+}
+
+@keyframes iconBounce{
+
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-4px);
+    }
+
+}
+
+@keyframes floatCircle{
+
+    0%,100%{
+        transform:translate(0,0);
+    }
+
+    50%{
+        transform:translate(-8px,8px);
+    }
+
+}
+
+@keyframes lineGrow{
+
+    0%,100%{
+        transform:scaleX(.6);
+        opacity:.6;
+    }
+
+    50%{
+        transform:scaleX(1.2);
+        opacity:1;
+    }
+
+}
+
+@keyframes numberFloat{
+
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-3px);
+    }
+
+}
+
+@keyframes previewFloat{
+
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-6px);
+    }
+
+}
+
+@keyframes avatarPulse{
+
+    0%,100%{
+        box-shadow:0 0 0 rgba(32,184,109,0);
+    }
+
+    50%{
+        box-shadow:0 0 20px rgba(32,184,109,.25);
+    }
+
+}
+
+@keyframes messageIn{
+
+    from{
+        opacity:0;
+        transform:translateY(7px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+@keyframes ctaGlow{
+
+    0%,100%{
+        box-shadow:0 0 0 rgba(25,164,99,0);
+    }
+
+    50%{
+        box-shadow:
+            0 20px 60px rgba(25,164,99,.08);
+    }
+
+}
+
+@keyframes chatFloat{
+
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-5px);
+    }
+
+}
+
+@keyframes chatRing{
+
+    0%{
+        transform:scale(.8);
+        opacity:.8;
+    }
+
+    100%{
+        transform:scale(1.5);
+        opacity:0;
+    }
+
+}
+
+@keyframes chatIn{
+
+    from{
+        opacity:0;
+        transform:
+            translateY(18px)
+            scale(.95);
+    }
+
+    to{
+        opacity:1;
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media(max-width:950px){
+
+    .nav-links{
+        gap:18px;
+    }
+
+    .hero-grid{
+        grid-template-columns:1fr;
+
+        text-align:center;
+
+        gap:45px;
+    }
+
+    .hero-description{
+        margin-left:auto;
+        margin-right:auto;
+    }
+
+    .hero-buttons,
+    .hero-note{
+        justify-content:center;
+    }
+
+    .dashboard-wrapper{
+        min-height:480px;
+    }
+
+    .feature-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .learning-grid{
+        grid-template-columns:1fr;
+
+        gap:45px;
+    }
+
+    .learning-copy{
+        text-align:center;
+    }
+
+    .learning-copy p{
+        margin-left:auto;
+        margin-right:auto;
+
+        max-width:650px;
+    }
+
+    .learning-list{
+        align-items:center;
+    }
+
+    .ai-panel{
+        grid-template-columns:1fr;
+    }
+
+    .footer-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:700px){
+
+    .container{
+        width:min(92%,520px);
+    }
+
+    .navbar{
+        height:70px;
+    }
+
+    .menu-btn{
+        display:block;
+    }
+
+    .nav-links{
+        display:none;
+
+        position:absolute;
+
+        left:0;
+        top:70px;
+
+        width:100%;
+
+        padding:20px;
+
+        flex-direction:column;
+
+        align-items:stretch;
+
+        gap:7px;
+
+        background:white;
+
+        border-bottom:1px solid #e5ebe7;
+
+        box-shadow:
+            0 15px 30px rgba(0,0,0,.05);
+
+        animation:
+            mobileMenu .3s ease;
+    }
+
+    .nav-links.active{
+        display:flex;
+    }
+
+    .nav-links a{
+        padding:12px;
+
+        text-align:center;
+    }
+
+    .hero{
+        padding:65px 0;
+    }
+
+    .hero h1{
+        font-size:46px;
+
+        letter-spacing:-2.5px;
+    }
+
+    .hero-description{
+        font-size:15px;
+    }
+
+    .dashboard-wrapper{
+        min-height:430px;
+    }
+
+    .dashboard{
+        width:350px;
+    }
+
+    .floating-card.goal{
+        left:-2px;
+
+        top:50px;
+    }
+
+    .floating-card.score{
+        right:-2px;
+
+        bottom:45px;
+    }
+
+    .section{
+        padding:75px 0;
+    }
+
+    .section-header h2,
+    .learning-copy h2{
+        font-size:33px;
+    }
+
+    .feature-grid{
+        grid-template-columns:1fr;
+    }
+
+    .stats-grid{
+        grid-template-columns:1fr 1fr;
+
+        gap:30px 0;
+    }
+
+    .stat{
+        border:0;
+    }
+
+    .stat strong{
+        font-size:31px;
+    }
+
+    .lesson-grid{
+        grid-template-columns:1fr;
+    }
+
+    .ai-panel{
+        padding:30px 20px;
+    }
+
+    .ai-copy h2{
+        font-size:32px;
+    }
+
+    .cta{
+        padding:70px 0;
+    }
+
+    .cta-box{
+        padding:50px 20px;
+    }
+
+    .cta-box h2{
+        font-size:32px;
+    }
+
+    .footer-grid{
+        grid-template-columns:1fr;
+
+        gap:30px;
+    }
+
+    .footer-bottom{
+        flex-direction:column;
+    }
+
+    .chat-window{
+        right:15px;
+
+        bottom:88px;
+    }
+
+    .chat-toggle{
+        right:18px;
+
+        bottom:18px;
+    }
+
+}
+
+
+/* =====================================================
+   SMALL PHONES
+===================================================== */
+
+@media(max-width:400px){
+
+    .hero h1{
+        font-size:40px;
+    }
+
+    .dashboard{
+        width:315px;
+
+        padding:17px;
+    }
+
+    .floating-card{
+        transform:scale(.86);
+    }
+
+    .floating-card.goal{
+        left:-15px;
+    }
+
+    .floating-card.score{
+        right:-15px;
+    }
+
+}
+
+
+/* =====================================================
+   MOBILE MENU ANIMATION
+===================================================== */
+
+@keyframes mobileMenu{
+
+    from{
+        opacity:0;
+        transform:translateY(-10px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+
+/* =====================================================
+   REDUCE MOTION ACCESSIBILITY
+===================================================== */
+
+@media(prefers-reduced-motion:reduce){
+
+    *,
+    *::before,
+    *::after{
+        animation-duration:.01ms !important;
+        animation-iteration-count:1 !important;
+        scroll-behavior:auto !important;
+        transition-duration:.01ms !important;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     SCROLL PROGRESS
+===================================================== -->
+
+<div class="scroll-progress" id="scrollProgress"></div>
+
+
+
+<!-- =====================================================
+     NAVIGATION
+===================================================== -->
+
+<header>
+
+<nav class="navbar container">
+
+    <a href="#home" class="logo">
+
+        <div class="logo-mark">
+            ₦
+        </div>
+
+        <div>
+            Budget<span>Basics</span>
+        </div>
+
+    </a>
+
+
+    <div class="nav-links" id="navLinks">
+
+        <a href="#home">
+            Home
+        </a>
+
+        <a href="#topics">
+            Learn
+        </a>
+
+        <a href="#learning">
+            Topics
+        </a>
+
+        <a href="#assistant">
+            AI Assistant
+        </a>
+
+        <a href="#start" class="nav-action">
+            Get Started
+        </a>
+
+    </div>
+
+
+    <button
+        class="menu-btn"
+        onclick="toggleMenu()"
+        aria-label="Open menu"
+    >
+        ☰
+    </button>
+
+</nav>
+
+</header>
+
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero" id="home">
+
+<div class="container hero-grid">
+
+
+    <div class="hero-content">
+
+        <div class="eyebrow">
+
+            <span class="eyebrow-dot"></span>
+
+            Financial education made simple
+
+        </div>
+
+
+        <h1>
+
+            Build better
+            <span>money habits.</span>
+
+        </h1>
+
+
+        <p class="hero-description">
+
+            BudgetBasics helps students understand
+            budgeting, saving and responsible spending
+            through simple lessons, practical tools
+            and an intelligent AI assistant.
+
+        </p>
+
+
+        <div class="hero-buttons">
+
+            <a href="#topics" class="btn btn-primary">
+
+                Start Learning
+
+                <span>→</span>
+
+            </a>
+
+
+            <a href="#assistant" class="btn btn-secondary">
+
+                Meet the AI Assistant
+
+            </a>
+
+        </div>
+
+
+        <div class="hero-note">
+
+            <div class="hero-note-icon">
+                ✓
+            </div>
+
+            Designed for students and everyday money decisions
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================================
+         DASHBOARD
+    ================================================= -->
+
+    <div class="dashboard-wrapper">
+
+
+        <div class="floating-card goal">
+
+            <div class="float-top">
+
+                <div class="float-icon">
+                    🎯
+                </div>
+
+                <div class="float-text">
+
+                    <strong>
+                        Savings Goal
+                    </strong>
+
+                    <small>
+                        74% completed
+                    </small>
+
+                </div>
+
+            </div>
+
+            <div class="mini-progress">
+                <div></div>
+            </div>
+
+        </div>
+
+
+
+        <div class="dashboard">
+
+
+            <div class="dashboard-header">
+
+                <div>
+
+                    <div class="dashboard-title">
+                        Personal Overview
+                    </div>
+
+                    <h3>
+                        My Budget
+                    </h3>
+
+                </div>
+
+
+                <div class="dashboard-menu">
+                    •••
+                </div>
+
+            </div>
+
+
+            <div class="balance-box">
+
+                <div class="balance-label">
+                    Available this month
+                </div>
+
+                <div class="balance-amount">
+                    ₦45,800
+                </div>
+
+                <div class="balance-change">
+                    ↑ 12.4% savings
+                </div>
+
+
+                <div class="chart">
+
+                    <div class="bar"></div>
+
+                    <div class="bar"></div>
+
+                    <div class="bar"></div>
+
+                    <div class="bar"></div>
+
+                    <div class="bar"></div>
+
+                    <div class="bar"></div>
+
+                    <div class="bar"></div>
+
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-section-title">
+
+                <strong>
+                    Recent activity
+                </strong>
+
+                <span>
+                    This week
+                </span>
+
+            </div>
+
+
+            <div class="transaction">
+
+                <div class="transaction-left">
+
+                    <div class="transaction-icon">
+                        🍔
+                    </div>
+
+                    <div>
+
+                        <div class="transaction-name">
+                            Food
+                        </div>
+
+                        <div class="transaction-date">
+                            Today
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="transaction-amount">
+                    -₦3,500
+                </div>
+
+            </div>
+
+
+            <div class="transaction">
+
+                <div class="transaction-left">
+
+                    <div class="transaction-icon">
+                        🚕
+                    </div>
+
+                    <div>
+
+                        <div class="transaction-name">
+                            Transport
+                        </div>
+
+                        <div class="transaction-date">
+                            Yesterday
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="transaction-amount">
+                    -₦2,000
+                </div>
+
+            </div>
+
+
+            <div class="transaction">
+
+                <div class="transaction-left">
+
+                    <div class="transaction-icon">
+                        💰
+                    </div>
+
+                    <div>
+
+                        <div class="transaction-name">
+                            Savings
+                        </div>
+
+                        <div class="transaction-date">
+                            Monday
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="transaction-amount">
+                    +₦10,000
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="floating-card score">
+
+            <div class="float-top">
+
+                <div class="score-circle">
+                    82
+                </div>
+
+                <div class="float-text">
+
+                    <strong>
+                        Money Score
+                    </strong>
+
+                    <small>
+                        Keep improving
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     TRUST
+===================================================== -->
+
+<section class="trust">
+
+<div class="container trust-content">
+
+    <div class="trust-text">
+        LEARN THE BASICS
+    </div>
+
+    <div class="trust-item">
+        ✓ Budgeting
+    </div>
+
+    <div class="trust-item">
+        ✓ Saving
+    </div>
+
+    <div class="trust-item">
+        ✓ Smart Spending
+    </div>
+
+    <div class="trust-item">
+        ✓ Financial Planning
+    </div>
+
+    <div class="trust-item">
+        ✓ AI Guidance
+    </div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FEATURES
+===================================================== -->
+
+<section class="section features" id="topics">
+
+<div class="container">
+
+
+    <div class="section-header reveal">
+
+        <div class="section-label">
+            What you can learn
+        </div>
+
+        <h2>
+            Financial skills for real life.
+        </h2>
+
+        <p>
+            Clear explanations and practical tools
+            designed to make money management easier
+            to understand.
+        </p>
+
+    </div>
+
+
+    <div class="feature-grid">
+
+
+        <div class="feature-card reveal">
+
+            <div class="feature-icon">
+                📊
+            </div>
+
+            <h3>
+                Budgeting
+            </h3>
+
+            <p>
+                Learn how to plan your income,
+                organize expenses and create a
+                realistic personal budget.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card reveal">
+
+            <div class="feature-icon">
+                💰
+            </div>
+
+            <h3>
+                Saving
+            </h3>
+
+            <p>
+                Understand savings goals and
+                develop simple habits that make
+                saving more consistent.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card reveal">
+
+            <div class="feature-icon">
+                🛍️
+            </div>
+
+            <h3>
+                Smart Spending
+            </h3>
+
+            <p>
+                Learn how to recognize needs,
+                wants and unnecessary spending
+                before making purchases.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card reveal">
+
+            <div class="feature-icon">
+                🧮
+            </div>
+
+            <h3>
+                Money Tools
+            </h3>
+
+            <p>
+                Use simple calculators and
+                interactive tools to understand
+                your everyday financial choices.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     LEARNING
+===================================================== -->
+
+<section class="section learning" id="learning">
+
+<div class="container learning-grid">
+
+
+    <div class="learning-copy reveal-left">
+
+        <div class="section-label">
+            Learn at your pace
+        </div>
+
+
+        <h2>
+            Understand your money before it controls you.
+        </h2>
+
+
+        <p>
+            Good financial habits begin with understanding.
+            BudgetBasics breaks down everyday money concepts
+            into simple lessons you can actually use.
+        </p>
+
+
+        <div class="learning-list">
+
+            <div>
+                <span class="check">✓</span>
+                Simple explanations
+            </div>
+
+            <div>
+                <span class="check">✓</span>
+                Practical examples
+            </div>
+
+            <div>
+                <span class="check">✓</span>
+                Interactive learning tools
+            </div>
+
+            <div>
+                <span class="check">✓</span>
+                Student-friendly financial lessons
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="lesson-grid reveal-right">
+
+
+        <div class="lesson-card">
+
+            <div class="lesson-number">
+                LESSON 01
+            </div>
+
+            <h3>
+                Understanding Income
+            </h3>
+
+            <p>
+                Learn how to identify your sources
+                of money and understand how much
+                you actually have available.
+            </p>
+
+        </div>
+
+
+        <div class="lesson-card">
+
+            <div class="lesson-number">
+                LESSON 02
+            </div>
+
+            <h3>
+                Building a Budget
+            </h3>
+
+            <p>
+                Create a simple plan for your money
+                and give every part of your income
+                a purpose.
+            </p>
+
+        </div>
+
+
+        <div class="lesson-card">
+
+            <div class="lesson-number">
+                LESSON 03
+            </div>
+
+            <h3>
+                Creating Savings Goals
+            </h3>
+
+            <p>
+                Turn your financial goals into
+                achievable savings targets.
+            </p>
+
+        </div>
+
+
+        <div class="lesson-card">
+
+            <div class="lesson-number">
+                LESSON 04
+            </div>
+
+            <h3>
+                Responsible Spending
+            </h3>
+
+            <p>
+                Understand the difference between
+                needs and wants and make thoughtful
+                spending decisions.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     STATS
+===================================================== -->
+
+<section class="stats">
+
+<div class="container stats-grid">
+
+
+    <div class="stat">
+
+        <strong>
+            4+
+        </strong>
+
+        <span>
+            Core financial topics
+        </span>
+
+    </div>
+
+
+    <div class="stat">
+
+        <strong>
+            10+
+        </strong>
+
+        <span>
+            Practical learning tools
+        </span>
+
+    </div>
+
+
+    <div class="stat">
+
+        <strong>
+            24/7
+        </strong>
+
+        <span>
+            AI assistant availability
+        </span>
+
+    </div>
+
+
+    <div class="stat">
+
+        <strong>
+            100%
+        </strong>
+
+        <span>
+            Student-focused learning
+        </span>
+
+    </div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     AI ASSISTANT
+===================================================== -->
+
+<section class="section ai-section" id="assistant">
+
+<div class="container">
+
+
+    <div class="ai-panel reveal">
+
+
+        <div class="ai-copy">
+
+            <div class="ai-badge">
+
+                <span class="ai-badge-dot"></span>
+
+                BudgetBasics AI
+
+            </div>
+
+
+            <h2>
+                Have a money question?
+                Ask your assistant.
+            </h2>
+
+
+            <p>
+                Whether you're trying to create your
+                first budget, understand saving or
+                decide how to manage your spending,
+                the BudgetBasics Assistant can help
+                explain the basics in simple language.
+            </p>
+
+
+            <br>
+
+
+            <button
+                class="btn btn-primary"
+                onclick="openChat()"
+            >
+                Talk to the Assistant →
+            </button>
+
+        </div>
+
+
+
+        <div class="ai-preview">
+
+
+            <div class="ai-preview-head">
+
+                <div class="ai-avatar">
+                    🤖
+                </div>
+
+                <div>
+
+                    <strong>
+                        BudgetBasics Assistant
+                    </strong>
+
+                    <small>
+                        Online • Ready to help
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="ai-preview-body">
+
+
+                <div class="preview-message">
+
+                    Hi! I'm here to help you understand
+                    budgeting and saving.
+
+                </div>
+
+
+                <div class="preview-message user">
+
+                    How should I start a budget?
+
+                </div>
+
+
+                <div class="preview-message">
+
+                    Start by writing down your income,
+                    essential expenses and savings goal.
+                    Then decide how much remains for
+                    flexible spending.
+
+                </div>
+
+
+                <div class="ai-suggestions">
+
+                    <span onclick="quickQuestion('How do I save money?')">
+                        How do I save?
+                    </span>
+
+                    <span onclick="quickQuestion('Explain budgeting')">
+                        Explain budgeting
+                    </span>
+
+                    <span onclick="quickQuestion('What are needs and wants?')">
+                        Needs vs wants
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     CTA
+===================================================== -->
+
+<section class="cta" id="start">
+
+<div class="container">
+
+<div class="cta-box reveal">
+
+    <h2>
+        Start building better money habits.
+    </h2>
+
+    <p>
+        Learn the basics, practice what you learn
+        and become more confident with everyday
+        financial decisions.
+    </p>
+
+    <a href="#topics" class="btn">
+        Explore BudgetBasics →
+    </a>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+<div class="container">
+
+
+<div class="footer-grid">
+
+
+    <div class="footer-brand">
+
+        <a href="#home" class="logo">
+
+            <div class="logo-mark">
+                ₦
+            </div>
+
+            <div>
+                Budget<span>Basics</span>
+            </div>
+
+        </a>
+
+
+        <p>
+            A simple educational platform helping
+            students build practical budgeting,
+            saving and responsible spending habits.
+        </p>
+
+    </div>
+
+
+
+    <div>
+
+        <div class="footer-heading">
+            LEARN
+        </div>
+
+        <div class="footer-links">
+
+            <a href="#topics">
+                Budgeting
+            </a>
+
+            <a href="#topics">
+                Saving
+            </a>
+
+            <a href="#topics">
+                Smart Spending
+            </a>
+
+            <a href="#learning">
+                Financial Planning
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <div>
+
+        <div class="footer-heading">
+            PLATFORM
+        </div>
+
+        <div class="footer-links">
+
+            <a href="#home">
+                Home
+            </a>
+
+            <a href="#learning">
+                Lessons
+            </a>
+
+            <a href="#assistant">
+                AI Assistant
+            </a>
+
+            <a href="#start">
+                Get Started
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- FOOTER AI -->
+
+    <div>
+
+        <div class="footer-heading">
+            ASK BUDGETBASICS AI
+        </div>
+
+
+        <div class="footer-ai">
+
+            <div class="footer-ai-title">
+
+                <span class="online-dot"></span>
+
+                <strong>
+                    Your Money Assistant
+                </strong>
+
+            </div>
+
+
+            <p>
+                Ask a quick question about budgeting,
+                saving or responsible spending.
+            </p>
+
+
+            <div class="footer-ai-input">
+
+                <input
+                    type="text"
+                    id="footerQuestion"
+                    placeholder="Ask a question..."
+                    onkeydown="footerEnter(event)"
+                >
+
+                <button onclick="askFooterAI()">
+                    →
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+<div class="footer-bottom">
+
+    <span>
+        © 2026 BudgetBasics. All rights reserved.
+    </span>
+
+    <span>
+        Learn • Save • Grow
+    </span>
+
+</div>
+
+
+</div>
+
+</footer>
+
+
+
+<!-- =====================================================
+     FLOATING CHAT
+===================================================== -->
+
+<button
+    class="chat-toggle"
+    id="chatToggle"
+    onclick="openChat()"
+    aria-label="Open BudgetBasics AI"
+>
+    🤖
+</button>
+
+
+
+<!-- =====================================================
+     CHAT WINDOW
+===================================================== -->
+
+<div class="chat-window" id="chatWindow">
+
+
+    <div class="chat-head">
+
+        <div class="chat-profile">
+
+            <div class="chat-profile-icon">
+                🤖
+            </div>
+
+            <div>
+
+                <strong>
+                    BudgetBasics AI
+                </strong>
+
+                <small>
+                    Online • Financial learning assistant
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <button
+            class="close-chat"
+            onclick="closeChat()"
+        >
+            ×
+        </button>
+
+    </div>
+
+
+
+    <div class="chat-messages" id="chatMessages">
+
+        <div class="chat-message bot">
+
+            Hello! 👋 I'm your BudgetBasics Assistant.
+            I can explain budgeting, saving, spending
+            and other basic money concepts.
+
+        </div>
+
+    </div>
+
+
+
+    <div class="chat-input">
+
+        <input
+            type="text"
+            id="chatInput"
+            placeholder="Ask your question..."
+            onkeydown="chatEnter(event)"
+        >
+
+        <button onclick="sendChat()">
+            Send
+        </button>
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+/* =====================================================
+   MOBILE NAVIGATION
+===================================================== */
+
+function toggleMenu(){
+
+    document
+        .getElementById("navLinks")
+        .classList.toggle("active");
+
+}
+
+
+document
+    .querySelectorAll(".nav-links a")
+    .forEach(function(link){
+
+        link.addEventListener("click",function(){
+
+            document
+                .getElementById("navLinks")
+                .classList.remove("active");
+
+        });
+
+    });
+
+
+
+/* =====================================================
+   SCROLL PROGRESS
+===================================================== */
+
+window.addEventListener("scroll",function(){
+
+    const scrollTop =
+        window.scrollY;
+
+    const documentHeight =
+        document.documentElement.scrollHeight
+        - window.innerHeight;
+
+    const progress =
+        (scrollTop / documentHeight) * 100;
+
+    document
+        .getElementById("scrollProgress")
+        .style.width = progress + "%";
+
+});
+
+
+
+/* =====================================================
+   SCROLL REVEAL
+===================================================== */
+
+const revealElements =
+    document.querySelectorAll(
+        ".reveal, .reveal-left, .reveal-right"
+    );
+
+
+const revealObserver =
+    new IntersectionObserver(
+
+        function(entries){
+
+            entries.forEach(function(entry){
+
+                if(entry.isIntersecting){
+
+                    entry.target.classList.add("active");
+
+                    revealObserver.unobserve(
+                        entry.target
+                    );
+
+                }
+
+            });
+
+        },
+
+        {
+            threshold:.12
+        }
+
+    );
+
+
+revealElements.forEach(function(element){
+
+    revealObserver.observe(element);
+
+});
+
+
+
+/* =====================================================
+   CHAT OPEN / CLOSE
+===================================================== */
+
+function openChat(){
+
+    document
+        .getElementById("chatWindow")
+        .classList.add("active");
+
+    document
+        .getElementById("chatToggle")
+        .style.display = "none";
+
+    setTimeout(function(){
+
+        document
+            .getElementById("chatInput")
+            .focus();
+
+    },150);
+
+}
+
+
+function closeChat(){
+
+    document
+        .getElementById("chatWindow")
+        .classList.remove("active");
+
+    document
+        .getElementById("chatToggle")
+        .style.display = "block";
+
+}
+
+
+
+/* =====================================================
+   ADD CHAT MESSAGE
+===================================================== */
+
+function addChatMessage(text,type){
+
+    const container =
+        document.getElementById("chatMessages");
+
+    const message =
+        document.createElement("div");
+
+    message.className =
+        "chat-message " + type;
+
+    message.textContent = text;
+
+    container.appendChild(message);
+
+    container.scrollTop =
+        container.scrollHeight;
+
+}
+
+
+
+/* =====================================================
+   BUDGETBASICS AI
+===================================================== */
+
+function getAssistantResponse(question){
+
+    const q =
+        question.toLowerCase();
+
+
+    if(
+        q.includes("budget") ||
+        q.includes("budgeting")
+    ){
+
+        return "A good beginner budget starts with four things: your income, essential expenses, savings and flexible spending. Write them down and make sure your planned spending does not exceed your available income.";
+
+    }
+
+
+    if(
+        q.includes("save") ||
+        q.includes("saving")
+    ){
+
+        return "Start with a realistic savings target. Even a small amount saved consistently can help you develop a strong saving habit. Give your goal a specific amount and deadline.";
+
+    }
+
+
+    if(
+        q.includes("spend") ||
+        q.includes("spending")
+    ){
+
+        return "Before buying something, ask whether it is a need or a want. You can also include a spending limit in your budget so you know how much you can safely spend.";
+
+    }
+
+
+    if(
+        q.includes("need") ||
+        q.includes("want")
+    ){
+
+        return "A need is something important for everyday living, such as food or necessary transportation. A want is something you would like to have but could live without.";
+
+    }
+
+
+    if(
+        q.includes("income") ||
+        q.includes("salary") ||
+        q.includes("allowance")
+    ){
+
+        return "Income is money you receive, such as an allowance, salary, business earnings or other legitimate sources. Knowing your income is the first step toward creating a useful budget.";
+
+    }
+
+
+    if(
+        q.includes("student")
+    ){
+
+        return "As a student, start small. Track your daily spending, separate needs from wants, set a savings target and review your budget regularly.";
+
+    }
+
+
+    if(
+        q.includes("money") ||
+        q.includes("finance")
+    ){
+
+        return "Good money management usually comes down to knowing what comes in, understanding what goes out, saving intentionally and making thoughtful spending decisions.";
+
+    }
+
+
+    return "That's a useful question. I can help with basic budgeting, saving, spending, income and financial planning. Try asking me something like 'How do I make a budget?'";
+
+}
+
+
+
+/* =====================================================
+   SEND CHAT
+===================================================== */
+
+function sendChat(){
+
+    const input =
+        document.getElementById("chatInput");
+
+    const question =
+        input.value.trim();
+
+
+    if(question === ""){
+        return;
+    }
+
+
+    addChatMessage(
+        question,
+        "user"
+    );
+
+
+    input.value = "";
+
+
+    setTimeout(function(){
+
+        const response =
+            getAssistantResponse(question);
+
+        addChatMessage(
+            response,
+            "bot"
+        );
+
+    },550);
+
+}
+
+
+
+/* =====================================================
+   ENTER CHAT
+===================================================== */
+
+function chatEnter(event){
+
+    if(event.key === "Enter"){
+
+        sendChat();
+
+    }
+
+}
+
+
+
+/* =====================================================
+   QUICK AI QUESTIONS
+===================================================== */
+
+function quickQuestion(question){
+
+    openChat();
+
+    setTimeout(function(){
+
+        document
+            .getElementById("chatInput")
+            .value = question;
+
+        sendChat();
+
+    },150);
+
+}
+
+
+
+/* =====================================================
+   FOOTER AI
+===================================================== */
+
+function askFooterAI(){
+
+    const input =
+        document.getElementById("footerQuestion");
+
+    const question =
+        input.value.trim();
+
+
+    openChat();
+
+
+    if(question === ""){
+        return;
+    }
+
+
+    input.value = "";
+
+
+    setTimeout(function(){
+
+        addChatMessage(
+            question,
+            "user"
+        );
+
+
+        setTimeout(function(){
+
+            const response =
+                getAssistantResponse(question);
+
+            addChatMessage(
+                response,
+                "bot"
+            );
+
+        },500);
+
+    },150);
+
+}
+
+
+
+/* =====================================================
+   FOOTER ENTER
+===================================================== */
+
+function footerEnter(event){
+
+    if(event.key === "Enter"){
+
+        askFooterAI();
+
+    }
+
+}
+
+</script>
+
+
+</body>
+
+</html>
+
