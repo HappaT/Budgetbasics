@@ -1,18 +1,11 @@
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>BudgetBasics | Build Better Money Habits</title>
 
 <style>
-
-
-
 *{
     margin:0;
     padding:0;
@@ -24,18 +17,20 @@ html{
 }
 
 body{
-    font-family:
-        Inter,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Arial,
-        sans-serif;
-
+    font-family:Arial, Helvetica, sans-serif;
     background:#f8faf9;
-    color:#14251d;
-    line-height:1.6;
+    color:#123524;
     overflow-x:hidden;
+}
+
+button,
+input,
+select{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
 }
 
 a{
@@ -43,4128 +38,2090 @@ a{
     color:inherit;
 }
 
-button,
-input{
-    font-family:inherit;
+:root{
+    --green:#0f5132;
+    --green2:#19a463;
+    --green3:#20b66c;
+    --dark:#103b27;
+    --light:#f8faf9;
+    --white:#fff;
+    --border:#dce8e1;
+    --text:#456153;
 }
 
-.container{
-    width:min(1180px,92%);
-    margin:auto;
-}
-
-
-/* =====================================================
+/* =========================
    SCROLL PROGRESS
-===================================================== */
+========================= */
 
 .scroll-progress{
     position:fixed;
     top:0;
     left:0;
-    width:0%;
-    height:3px;
+    height:4px;
+    width:0;
     background:#20b66c;
     z-index:9999;
 }
 
+/* =========================
+   ONBOARDING SCREENS
+========================= */
 
-/* =====================================================
-   NAVIGATION
-===================================================== */
+.screen{
+    min-height:100vh;
+    display:none;
+}
+
+.screen.active{
+    display:flex;
+    animation:screenIn .45s ease both;
+}
+
+/* Smooth entrance for every major screen. */
+@keyframes screenIn{
+    from{opacity:0; transform:translateY(12px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+.welcome-screen{
+    align-items:center;
+    justify-content:center;
+    padding:30px;
+    background:
+        radial-gradient(circle at top right,rgba(32,182,108,.18),transparent 35%),
+        radial-gradient(circle at bottom left,rgba(15,81,50,.12),transparent 35%),
+        #f8faf9;
+    position:relative;
+    overflow:hidden;
+}
+
+.welcome-screen::before,
+.welcome-screen::after{
+    content:"";
+    position:absolute;
+    border-radius:50%;
+    filter:blur(2px);
+    animation:float 6s ease-in-out infinite;
+}
+
+.welcome-screen::before{
+    width:250px;
+    height:250px;
+    background:rgba(32,182,108,.08);
+    top:-80px;
+    left:-80px;
+}
+
+.welcome-screen::after{
+    width:300px;
+    height:300px;
+    background:rgba(15,81,50,.06);
+    right:-100px;
+    bottom:-100px;
+    animation-delay:1s;
+}
+
+.welcome-content{
+    position:relative;
+    z-index:2;
+    text-align:center;
+    max-width:700px;
+    animation:fadeUp .8s ease;
+}
+
+.brand{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    font-size:38px;
+    font-weight:900;
+    color:var(--green);
+    margin-bottom:35px;
+}
+
+.brand-icon{
+    width:48px;
+    height:48px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:14px;
+    color:#fff;
+    background:linear-gradient(135deg,var(--green),var(--green3));
+    box-shadow:0 12px 30px rgba(15,81,50,.2);
+}
+
+.welcome-content h1{
+    font-size:clamp(42px,7vw,78px);
+    line-height:1.02;
+    color:#103b27;
+    margin-bottom:22px;
+}
+
+.welcome-content h1 span{
+    color:var(--green2);
+}
+
+.welcome-content p{
+    font-size:19px;
+    line-height:1.7;
+    color:#587064;
+    max-width:600px;
+    margin:0 auto 35px;
+}
+
+.start-btn{
+    border:0;
+    padding:16px 34px;
+    border-radius:50px;
+    color:white;
+    background:linear-gradient(135deg,var(--green),var(--green3));
+    font-weight:800;
+    font-size:17px;
+    box-shadow:0 14px 30px rgba(15,81,50,.2);
+    transition:.3s;
+}
+
+.start-btn:hover{
+    transform:translateY(-4px);
+    box-shadow:0 18px 38px rgba(15,81,50,.28);
+}
+
+.welcome-small{
+    margin-top:22px;
+    font-size:13px;
+    color:#789084;
+}
+
+/* =========================
+   AUTH
+========================= */
+
+.auth-screen,
+.setup-screen{
+    min-height:100vh;
+    align-items:center;
+    justify-content:center;
+    padding:30px 20px;
+    background:
+        radial-gradient(circle at top right,rgba(32,182,108,.12),transparent 30%),
+        #f8faf9;
+}
+
+.auth-box,
+.setup-box{
+    width:100%;
+    max-width:500px;
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:28px;
+    padding:38px;
+    box-shadow:0 25px 70px rgba(16,59,39,.10);
+    animation:fadeUp .6s ease;
+}
+
+.auth-logo,
+.setup-logo{
+    text-align:center;
+    font-size:27px;
+    font-weight:900;
+    color:var(--green);
+    margin-bottom:10px;
+}
+
+.auth-title,
+.setup-title{
+    text-align:center;
+    font-size:30px;
+    color:var(--dark);
+    margin-bottom:8px;
+}
+
+.auth-subtitle,
+.setup-subtitle{
+    text-align:center;
+    color:#6a7d73;
+    line-height:1.6;
+    margin-bottom:25px;
+}
+
+.auth-tabs{
+    display:flex;
+    gap:8px;
+    padding:5px;
+    background:#f1f6f3;
+    border-radius:14px;
+    margin-bottom:25px;
+}
+
+.auth-tab{
+    flex:1;
+    border:0;
+    padding:12px;
+    border-radius:10px;
+    background:transparent;
+    color:#587064;
+    font-weight:700;
+}
+
+.auth-tab.active{
+    background:#fff;
+    color:var(--green);
+    box-shadow:0 3px 12px rgba(0,0,0,.06);
+}
+
+.auth-form{
+    display:none;
+}
+
+.auth-form.active{
+    display:block;
+}
+
+.form-group{
+    margin-bottom:17px;
+}
+
+.form-group label{
+    display:block;
+    font-size:14px;
+    font-weight:700;
+    color:#315543;
+    margin-bottom:8px;
+}
+
+.form-group input,
+.form-group select{
+    width:100%;
+    padding:14px 15px;
+    border:1px solid #d7e4dd;
+    border-radius:12px;
+    outline:none;
+    background:#fbfdfc;
+    color:#183d2b;
+    transition:.25s;
+}
+
+.form-group input:focus,
+.form-group select:focus{
+    border-color:var(--green2);
+    box-shadow:0 0 0 4px rgba(32,182,108,.10);
+}
+
+.primary-btn{
+    width:100%;
+    border:0;
+    padding:15px;
+    border-radius:12px;
+    background:var(--green);
+    color:white;
+    font-weight:800;
+    transition:.3s;
+}
+
+.primary-btn:hover{
+    background:var(--green2);
+    transform:translateY(-2px);
+}
+
+.back-btn{
+    border:0;
+    background:none;
+    color:#668074;
+    margin-top:18px;
+    width:100%;
+    font-size:14px;
+}
+
+.auth-message{
+    margin-top:15px;
+    padding:12px;
+    border-radius:10px;
+    display:none;
+    font-size:14px;
+    line-height:1.5;
+}
+
+.auth-message.error{
+    display:block;
+    background:#fff0f0;
+    color:#b42318;
+}
+
+.auth-message.success{
+    display:block;
+    background:#eefaf3;
+    color:#167647;
+}
+
+/* =========================
+   SETUP
+========================= */
+
+.setup-box{
+    max-width:650px;
+}
+
+.progress-wrap{
+    height:7px;
+    border-radius:20px;
+    background:#edf3ef;
+    overflow:hidden;
+    margin:20px 0 28px;
+}
+
+.progress-bar{
+    height:100%;
+    width:20%;
+    background:linear-gradient(90deg,var(--green),var(--green3));
+    transition:.35s;
+}
+
+.setup-step{
+    display:none;
+}
+
+.setup-step.active{
+    display:block;
+    animation:fadeUp .4s ease;
+}
+
+.question-number{
+    color:var(--green2);
+    font-weight:800;
+    font-size:13px;
+    margin-bottom:8px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+.question-title{
+    font-size:25px;
+    color:var(--dark);
+    margin-bottom:18px;
+}
+
+.option-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+}
+
+.option{
+    position:relative;
+}
+
+.option input{
+    position:absolute;
+    opacity:0;
+}
+
+.option label{
+    display:block;
+    padding:16px;
+    border:1px solid #dce8e1;
+    border-radius:14px;
+    cursor:pointer;
+    color:#456153;
+    font-weight:700;
+    transition:.25s;
+    background:#fbfdfc;
+}
+
+.option input:checked + label{
+    border-color:var(--green2);
+    background:#effaf4;
+    color:var(--green);
+    box-shadow:0 0 0 3px rgba(32,182,108,.08);
+}
+
+.setup-input{
+    width:100%;
+    padding:16px;
+    border:1px solid #dce8e1;
+    border-radius:14px;
+    outline:none;
+}
+
+.setup-input:focus{
+    border-color:var(--green2);
+    box-shadow:0 0 0 4px rgba(32,182,108,.08);
+}
+
+.setup-actions{
+    display:flex;
+    gap:12px;
+    margin-top:25px;
+}
+
+.setup-actions button{
+    flex:1;
+    padding:14px;
+    border-radius:12px;
+    font-weight:800;
+}
+
+.previous-btn{
+    border:1px solid #d6e3dc;
+    background:#fff;
+    color:#456153;
+}
+
+.next-btn{
+    border:0;
+    background:var(--green);
+    color:white;
+}
+
+.next-btn:hover{
+    background:var(--green2);
+}
+
+.setup-error{
+    color:#b42318;
+    font-size:14px;
+    margin-top:12px;
+    display:none;
+}
+
+/* =========================
+   SUCCESS
+========================= */
+
+.success-screen{
+    min-height:100vh;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:30px;
+    background:#f8faf9;
+}
+
+.success-screen.active{
+    display:flex;
+}
+
+.success-box{
+    max-width:500px;
+    animation:fadeUp .7s ease;
+}
+
+.success-icon{
+    width:85px;
+    height:85px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:0 auto 25px;
+    background:#e8f8ef;
+    color:var(--green2);
+    font-size:45px;
+    font-weight:900;
+}
+
+.success-box h2{
+    font-size:35px;
+    color:var(--dark);
+    margin-bottom:12px;
+}
+
+.success-box p{
+    color:#60756b;
+    line-height:1.7;
+    margin-bottom:25px;
+}
+
+/* =========================
+   MAIN WEBSITE
+========================= */
+
+#mainApp{
+    display:none;
+}
+
+#mainApp.active{
+    display:block;
+}
 
 header{
     position:sticky;
     top:0;
     z-index:1000;
-
     background:rgba(255,255,255,.94);
-
-    backdrop-filter:blur(16px);
-
-    border-bottom:1px solid #e8eee9;
-
-    animation:navDrop .7s ease;
+    backdrop-filter:blur(15px);
+    border-bottom:1px solid #e5eee9;
 }
 
 .navbar{
-    height:76px;
-
+    max-width:1200px;
+    margin:auto;
+    min-height:75px;
     display:flex;
     align-items:center;
     justify-content:space-between;
+    padding:0 25px;
 }
 
-.logo{
-    display:flex;
-    align-items:center;
-    gap:9px;
-
-    font-size:24px;
-    font-weight:800;
-
-    letter-spacing:-.8px;
-
-    transition:.3s ease;
-}
-
-.logo:hover{
-    transform:translateY(-2px);
-}
-
-.logo-mark{
-    width:38px;
-    height:38px;
-
-    border-radius:11px;
-
-    background:#0f5132;
-    color:white;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
+.nav-logo{
+    font-size:25px;
     font-weight:900;
-
-    box-shadow:
-        0 7px 18px rgba(15,81,50,.18);
-
-    transition:.3s ease;
+    color:var(--green);
 }
 
-.logo:hover .logo-mark{
-    transform:rotate(-8deg) scale(1.05);
-}
-
-.logo span{
-    color:#19a463;
+.nav-logo span{
+    color:var(--green2);
 }
 
 .nav-links{
     display:flex;
     align-items:center;
-    gap:32px;
+    gap:27px;
 }
 
 .nav-links a{
-    position:relative;
-
-    color:#56635c;
+    color:#476356;
     font-size:14px;
-    font-weight:600;
-
-    transition:.25s ease;
-}
-
-.nav-links a:not(.nav-action)::after{
-    content:"";
-
-    position:absolute;
-    left:0;
-    bottom:-7px;
-
-    width:0;
-    height:2px;
-
-    background:#19a463;
-
-    transition:.3s ease;
-}
-
-.nav-links a:not(.nav-action):hover::after{
-    width:100%;
+    font-weight:700;
+    transition:.25s;
 }
 
 .nav-links a:hover{
-    color:#15945a;
+    color:var(--green2);
 }
 
-.nav-action{
-    padding:11px 19px;
-
-    border-radius:9px;
-
-    background:#0f5132;
-
-    color:white !important;
-
-    box-shadow:
-        0 7px 18px rgba(15,81,50,.13);
-
-    transition:.3s ease;
-}
-
-.nav-action:hover{
-    background:#19a463;
-
-    transform:translateY(-2px);
-
-    box-shadow:
-        0 10px 23px rgba(15,81,50,.2);
+.nav-start{
+    padding:10px 18px;
+    border-radius:25px;
+    background:var(--green);
+    color:#fff!important;
 }
 
 .menu-btn{
     display:none;
-
-    width:42px;
-    height:42px;
-
-    border:1px solid #e2e9e4;
-
-    background:white;
-
-    border-radius:9px;
-
-    font-size:20px;
-
-    cursor:pointer;
-
-    transition:.3s;
+    border:0;
+    background:none;
+    font-size:26px;
+    color:var(--green);
 }
 
-.menu-btn:hover{
-    background:#eff9f3;
-    border-color:#bfe1cd;
-}
-
-
-
+/* =========================
+   HERO
+========================= */
 
 .hero{
+    min-height:680px;
+    display:flex;
+    align-items:center;
     position:relative;
-
     overflow:hidden;
-
-    padding:92px 0 85px;
-
+    padding:80px 25px;
     background:
-        radial-gradient(
-            circle at 85% 20%,
-            rgba(31,175,101,.13),
-            transparent 32%
-        ),
-        radial-gradient(
-            circle at 10% 80%,
-            rgba(31,175,101,.07),
-            transparent 30%
-        ),
-        #f8faf9;
+        radial-gradient(circle at 80% 30%,rgba(32,182,108,.15),transparent 30%),
+        linear-gradient(135deg,#f8faf9,#eef8f2);
 }
 
-.hero::before{
-    content:"";
-
-    position:absolute;
-
-    width:450px;
-    height:450px;
-
-    border:1px solid rgba(25,164,99,.08);
-
-    border-radius:50%;
-
-    right:-180px;
-    top:-180px;
-
-    animation:rotateSlow 25s linear infinite;
-}
-
-.hero::after{
-    content:"";
-
-    position:absolute;
-
-    width:280px;
-    height:280px;
-
-    border:1px solid rgba(25,164,99,.08);
-
-    border-radius:50%;
-
-    left:-150px;
-    bottom:-150px;
-
-    animation:rotateSlow 20s linear infinite reverse;
-}
-
-.hero-grid{
-    position:relative;
-    z-index:2;
-
+.hero-container{
+    max-width:1200px;
+    width:100%;
+    margin:auto;
     display:grid;
-
-    grid-template-columns:1fr 1fr;
-
-    gap:80px;
-
+    grid-template-columns:1.05fr .95fr;
     align-items:center;
+    gap:60px;
 }
 
-.hero-content{
-    animation:heroIn 1s cubic-bezier(.2,.8,.2,1);
-}
-
-.eyebrow{
-    display:inline-flex;
-
-    align-items:center;
-    gap:8px;
-
-    padding:7px 12px;
-
-    border:1px solid #cfe9da;
-
-    background:#effaf4;
-
-    color:#158653;
-
+.hero-tag{
+    display:inline-block;
+    padding:8px 14px;
     border-radius:30px;
-
-    font-size:12px;
-
+    background:#e8f7ef;
+    color:var(--green);
     font-weight:800;
-
-    letter-spacing:.3px;
-
-    margin-bottom:23px;
-
-    animation:
-        fadeDown .8s ease .1s both,
-        softPulse 3s ease-in-out 1.5s infinite;
-}
-
-.eyebrow-dot{
-    width:7px;
-    height:7px;
-
-    border-radius:50%;
-
-    background:#20b86c;
-
-    animation:dotPulse 2s ease-in-out infinite;
+    font-size:13px;
+    margin-bottom:20px;
 }
 
 .hero h1{
-    max-width:650px;
-
-    font-size:clamp(45px,6vw,69px);
-
+    font-size:clamp(42px,6vw,70px);
     line-height:1.04;
-
-    letter-spacing:-3.5px;
-
-    color:#102d20;
-
-    margin-bottom:24px;
-
-    animation:
-        fadeUp .9s ease .15s both;
+    color:var(--dark);
+    margin-bottom:22px;
 }
 
 .hero h1 span{
-    color:#18a360;
-
-    display:inline-block;
-
-    animation:
-        textFloat 4s ease-in-out infinite;
+    color:var(--green2);
 }
 
-.hero-description{
-    max-width:600px;
-
-    color:#68756e;
-
-    font-size:17px;
-
+.hero p{
+    font-size:18px;
+    color:#5d7167;
     line-height:1.8;
-
-    margin-bottom:31px;
-
-    animation:
-        fadeUp .9s ease .3s both;
+    max-width:600px;
+    margin-bottom:30px;
 }
 
 .hero-buttons{
     display:flex;
-
     gap:12px;
-
     flex-wrap:wrap;
-
-    animation:
-        fadeUp .9s ease .45s both;
 }
 
-.btn{
-    display:inline-flex;
-
-    align-items:center;
-    justify-content:center;
-
-    gap:9px;
-
-    min-height:48px;
-
-    padding:0 21px;
-
-    border-radius:9px;
-
-    font-size:14px;
-
-    font-weight:750;
-
-    transition:
-        transform .3s ease,
-        box-shadow .3s ease,
-        background .3s ease,
-        color .3s ease;
+.hero-btn{
+    padding:14px 22px;
+    border-radius:12px;
+    border:0;
+    background:var(--green);
+    color:#fff;
+    font-weight:800;
 }
 
-.btn-primary{
-    position:relative;
-
-    overflow:hidden;
-
-    background:#0f5132;
-
-    color:white;
-
-    box-shadow:
-        0 9px 22px rgba(15,81,50,.15);
-}
-
-.btn-primary::before{
-    content:"";
-
-    position:absolute;
-
-    width:0;
-    height:0;
-
-    background:rgba(255,255,255,.15);
-
-    border-radius:50%;
-
-    left:50%;
-    top:50%;
-
-    transform:translate(-50%,-50%);
-
-    transition:
-        width .5s ease,
-        height .5s ease;
-}
-
-.btn-primary:hover::before{
-    width:300px;
-    height:300px;
-}
-
-.btn-primary:hover{
-    background:#18a360;
-
+.hero-btn:hover{
     transform:translateY(-3px);
-
-    box-shadow:
-        0 14px 28px rgba(15,81,50,.2);
+    box-shadow:0 10px 24px rgba(15,81,50,.16);
 }
 
-.btn-primary span{
-    transition:.3s;
+.hero-btn.secondary{
+    background:#fff;
+    color:var(--green);
+    border:1px solid #d9e7df;
 }
 
-.btn-primary:hover span{
-    transform:translateX(5px);
+.dashboard-card{
+    background:#fff;
+    border:1px solid #dfebe4;
+    border-radius:25px;
+    padding:25px;
+    box-shadow:0 25px 70px rgba(15,81,50,.12);
+    animation:float 5s ease-in-out infinite;
 }
 
-.btn-secondary{
-    background:white;
-
-    color:#244337;
-
-    border:1px solid #dce6df;
-}
-
-.btn-secondary:hover{
-    border-color:#19a463;
-
-    color:#168b54;
-
-    transform:translateY(-3px);
-
-    box-shadow:
-        0 10px 25px rgba(20,70,45,.07);
-}
-
-.hero-note{
+.dashboard-top{
     display:flex;
-
-    align-items:center;
-
-    gap:9px;
-
-    margin-top:25px;
-
-    color:#7a857f;
-
-    font-size:12px;
-
-    animation:
-        fadeUp .9s ease .6s both;
-}
-
-.hero-note-icon{
-    width:23px;
-    height:23px;
-
-    border-radius:50%;
-
-    background:#e3f5ea;
-
-    color:#15945a;
-
-    display:flex;
-
-    justify-content:center;
-    align-items:center;
-
-    font-size:12px;
-
-    animation:
-        checkPulse 2.5s ease-in-out infinite;
-}
-
-
-.dashboard-wrapper{
-    position:relative;
-
-    min-height:510px;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    animation:
-        fadeIn 1.2s ease .2s both;
-}
-
-.dashboard{
-    width:410px;
-    max-width:100%;
-
-    background:white;
-
-    border:1px solid #e3ebe5;
-
-    border-radius:21px;
-
-    padding:22px;
-
-    box-shadow:
-        0 35px 80px rgba(18,55,38,.12),
-        0 5px 15px rgba(18,55,38,.05);
-
-    transform:rotate(1.5deg);
-
-    animation:
-        dashboardFloat 5s ease-in-out infinite;
-}
-
-.dashboard:hover{
-    animation-play-state:paused;
-
-    transform:
-        rotate(0deg)
-        scale(1.02);
-
-    box-shadow:
-        0 40px 90px rgba(18,55,38,.16);
-}
-
-.dashboard-header{
-    display:flex;
-
-    align-items:center;
-
     justify-content:space-between;
-
-    margin-bottom:22px;
+    margin-bottom:25px;
 }
 
 .dashboard-title{
-    font-size:12px;
-    color:#7b867f;
-
-    margin-bottom:2px;
+    color:#71837a;
+    font-size:13px;
 }
 
-.dashboard-header h3{
-    font-size:18px;
-    color:#143526;
-}
-
-.dashboard-menu{
-    width:35px;
-    height:35px;
-
-    border-radius:9px;
-
-    background:#eff7f2;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    color:#168e55;
-
-    animation:
-        menuRotate 4s ease-in-out infinite;
-}
-
-.balance-box{
-    background:#103b27;
-
-    color:white;
-
-    border-radius:15px;
-
-    padding:21px;
-
-    margin-bottom:17px;
-
-    position:relative;
-
-    overflow:hidden;
-}
-
-.balance-box::before{
-    content:"";
-
-    position:absolute;
-
-    width:130px;
-    height:130px;
-
-    border-radius:50%;
-
-    background:rgba(65,217,143,.07);
-
-    right:-45px;
-    top:-55px;
-
-    animation:
-        floatCircle 4s ease-in-out infinite;
-}
-
-.balance-label{
-    color:#a9c0b4;
-
-    font-size:11px;
-}
-
-.balance-amount{
-    font-size:31px;
-
-    font-weight:800;
-
-    letter-spacing:-1px;
-
-    margin:2px 0 7px;
-
-    animation:
-        numberGlow 3s ease-in-out infinite;
+.dashboard-balance{
+    font-size:35px;
+    font-weight:900;
+    color:var(--dark);
+    margin-top:6px;
 }
 
 .balance-change{
-    display:inline-flex;
-
-    gap:5px;
-
-    align-items:center;
-
-    background:rgba(42,201,119,.14);
-
-    color:#59dd96;
-
-    border-radius:6px;
-
-    padding:4px 7px;
-
-    font-size:10px;
-
-    font-weight:700;
+    color:var(--green2);
+    font-size:13px;
+    font-weight:800;
 }
 
 .chart{
-    height:75px;
-
-    margin-top:16px;
-
+    height:150px;
     display:flex;
-
     align-items:flex-end;
-
-    gap:7px;
+    gap:10px;
+    padding:15px 0;
+    border-bottom:1px solid #e8eee9;
 }
 
 .bar{
     flex:1;
-
-    background:#38c87d;
-
-    border-radius:5px 5px 2px 2px;
-
-    opacity:.85;
-
+    border-radius:8px 8px 0 0;
+    background:linear-gradient(to top,var(--green),var(--green3));
+    animation:grow .8s ease forwards;
     transform-origin:bottom;
-
-    animation:
-        barGrow 1.2s cubic-bezier(.2,.8,.2,1) both;
 }
 
-.bar:nth-child(1){
-    height:35%;
-    animation-delay:.4s;
-}
+.bar:nth-child(1){height:40%}
+.bar:nth-child(2){height:58%}
+.bar:nth-child(3){height:47%}
+.bar:nth-child(4){height:75%}
+.bar:nth-child(5){height:65%}
+.bar:nth-child(6){height:88%}
+.bar:nth-child(7){height:78%}
 
-.bar:nth-child(2){
-    height:50%;
-    animation-delay:.5s;
-}
-
-.bar:nth-child(3){
-    height:43%;
-    animation-delay:.6s;
-}
-
-.bar:nth-child(4){
-    height:68%;
-    animation-delay:.7s;
-}
-
-.bar:nth-child(5){
-    height:58%;
-    animation-delay:.8s;
-}
-
-.bar:nth-child(6){
-    height:81%;
-    animation-delay:.9s;
-}
-
-.bar:nth-child(7){
-    height:72%;
-    animation-delay:1s;
-}
-
-.dashboard-section-title{
-    display:flex;
-
-    justify-content:space-between;
-
-    margin:18px 0 10px;
-}
-
-.dashboard-section-title strong{
-    font-size:12px;
-
-    color:#263e32;
-}
-
-.dashboard-section-title span{
-    color:#89948e;
-
-    font-size:10px;
+.transactions{
+    margin-top:20px;
 }
 
 .transaction{
     display:flex;
-
     align-items:center;
-
     justify-content:space-between;
-
-    padding:11px 0;
-
-    border-bottom:1px solid #edf1ee;
-
-    transition:.3s ease;
+    padding:12px 0;
+    border-bottom:1px solid #edf2ef;
 }
 
-.transaction:hover{
-    padding-left:6px;
-    padding-right:6px;
-
-    background:#fafcfb;
-
-    border-radius:8px;
+.transaction:last-child{
+    border-bottom:0;
 }
 
 .transaction-left{
     display:flex;
-
     align-items:center;
-
     gap:10px;
 }
 
 .transaction-icon{
-    width:34px;
-    height:34px;
-
-    border-radius:9px;
-
+    width:35px;
+    height:35px;
+    border-radius:10px;
     display:flex;
-
-    justify-content:center;
-
     align-items:center;
-
-    background:#f0f7f3;
-
-    transition:.3s;
-}
-
-.transaction:hover .transaction-icon{
-    transform:scale(1.12) rotate(-5deg);
+    justify-content:center;
+    background:#edf8f2;
 }
 
 .transaction-name{
-    color:#30473c;
-
-    font-size:11px;
-
     font-weight:700;
+    color:#365444;
+    font-size:14px;
 }
 
 .transaction-date{
-    color:#98a19c;
-
-    font-size:9px;
-}
-
-.transaction-amount{
+    color:#82938a;
     font-size:11px;
+    margin-top:3px;
+}
 
+.transaction-price{
     font-weight:800;
-
-    color:#273d33;
+    color:#345141;
 }
 
-
-/* Floating cards */
-
-.floating-card{
-    position:absolute;
-
-    background:white;
-
-    border:1px solid #e5ece7;
-
-    border-radius:13px;
-
-    padding:13px;
-
-    box-shadow:
-        0 18px 45px rgba(17,56,38,.11);
-
-    z-index:2;
-
-    transition:.3s ease;
-}
-
-.floating-card:hover{
-    transform:scale(1.06) !important;
-
-    box-shadow:
-        0 25px 55px rgba(17,56,38,.16);
-}
-
-.floating-card.goal{
-    left:-10px;
-    top:80px;
-
-    animation:
-        floatOne 4s ease-in-out infinite;
-}
-
-.floating-card.score{
-    right:-10px;
-    bottom:72px;
-
-    animation:
-        floatTwo 4.5s ease-in-out infinite;
-}
-
-.float-top{
-    display:flex;
-
-    gap:9px;
-
-    align-items:center;
-}
-
-.float-icon{
-    width:34px;
-    height:34px;
-
-    border-radius:9px;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    background:#eaf8f0;
-
-    animation:
-        iconBounce 2.5s ease-in-out infinite;
-}
-
-.float-text strong{
-    display:block;
-
-    color:#18382a;
-
-    font-size:11px;
-}
-
-.float-text small{
-    color:#8b9690;
-
-    font-size:9px;
-}
-
-.mini-progress{
-    width:105px;
-
-    height:5px;
-
-    background:#e9efeb;
-
-    border-radius:10px;
-
-    margin-top:10px;
-
-    overflow:hidden;
-}
-
-.mini-progress div{
-    height:100%;
-
-    width:74%;
-
-    background:#19a463;
-
-    border-radius:10px;
-
-    transform-origin:left;
-
-    animation:
-        progressGrow 1.5s ease 1s both;
-}
-
-.score-circle{
-    width:36px;
-    height:36px;
-
-    border-radius:50%;
-
-    border:4px solid #dff3e7;
-
-    border-top-color:#19a463;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    font-size:9px;
-
-    font-weight:800;
-
-    color:#153c2b;
-
-    animation:
-        scoreSpin 3s linear infinite;
-}
-
-
-/* =====================================================
-   TRUST STRIP
-===================================================== */
+/* =========================
+   TRUST
+========================= */
 
 .trust{
-    background:white;
-
-    border-top:1px solid #edf1ee;
-
-    border-bottom:1px solid #edf1ee;
-
-    padding:24px 0;
+    padding:30px 25px;
+    background:var(--green);
+    color:#fff;
 }
 
-.trust-content{
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    gap:35px;
-
-    flex-wrap:wrap;
-}
-
-.trust-text{
-    color:#8a958f;
-
-    font-size:11px;
-
-    font-weight:700;
-}
-
-.trust-item{
-    color:#59675f;
-
-    font-size:12px;
-
-    font-weight:750;
-
-    display:flex;
-
-    gap:7px;
-
-    align-items:center;
-
-    transition:.3s;
-}
-
-.trust-item:hover{
-    color:#15965b;
-
-    transform:translateY(-3px);
-}
-
-
-/* =====================================================
-   SECTIONS
-===================================================== */
-
-.section{
-    padding:105px 0;
-}
-
-.section-header{
-    max-width:650px;
-
-    margin:0 auto 52px;
-
+.trust-inner{
+    max-width:1100px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
     text-align:center;
 }
 
-.section-label{
-    color:#15965b;
-
-    font-size:11px;
-
-    text-transform:uppercase;
-
-    letter-spacing:1.8px;
-
-    font-weight:850;
-
-    position:relative;
-}
-
-.section-label::after{
-    content:"";
-
+.trust-item strong{
     display:block;
-
-    width:30px;
-    height:2px;
-
-    background:#20b66c;
-
-    margin:9px auto 0;
-
-    transform-origin:center;
-
-    animation:
-        lineGrow 2s ease-in-out infinite;
+    font-size:25px;
+    margin-bottom:5px;
 }
 
-.section-header h2{
-    color:#112f21;
-
-    font-size:42px;
-
-    line-height:1.12;
-
-    letter-spacing:-1.6px;
-
-    margin:11px 0 14px;
+.trust-item span{
+    opacity:.8;
+    font-size:13px;
 }
 
-.section-header p{
-    color:#6c7871;
+/* =========================
+   SECTIONS
+========================= */
 
-    font-size:15px;
+.section{
+    padding:90px 25px;
 }
 
-
-/* =====================================================
-   FEATURE CARDS
-===================================================== */
-
-.features{
-    background:#fff;
+.section-container{
+    max-width:1200px;
+    margin:auto;
 }
 
-.feature-grid{
+.section-heading{
+    max-width:700px;
+    margin-bottom:45px;
+}
+
+.section-heading.center{
+    text-align:center;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.section-heading small{
+    color:var(--green2);
+    font-weight:900;
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+.section-heading h2{
+    color:var(--dark);
+    font-size:clamp(32px,5vw,48px);
+    margin:10px 0 15px;
+}
+
+.section-heading p{
+    color:#667a70;
+    line-height:1.8;
+}
+
+/* =========================
+   PERSONAL PROFILE
+========================= */
+
+.personal-card{
     display:grid;
-
     grid-template-columns:repeat(4,1fr);
-
-    gap:17px;
+    gap:15px;
+    margin-bottom:70px;
 }
 
-.feature-card{
-    position:relative;
-
-    overflow:hidden;
-
-    padding:28px 24px;
-
-    border:1px solid #e4ebe6;
-
-    border-radius:15px;
-
-    background:white;
-
-    transition:
-        transform .4s cubic-bezier(.2,.8,.2,1),
-        box-shadow .4s ease,
-        border-color .3s ease;
+.personal-item{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:20px;
 }
 
-.feature-card::before{
-    content:"";
-
-    position:absolute;
-
-    width:100px;
-    height:100px;
-
-    border-radius:50%;
-
-    background:#effaf4;
-
-    right:-60px;
-    top:-60px;
-
-    transition:.5s ease;
-}
-
-.feature-card:hover::before{
-    width:180px;
-    height:180px;
-}
-
-.feature-card:hover{
-    transform:
-        translateY(-9px)
-        scale(1.015);
-
-    border-color:#c8e4d3;
-
-    box-shadow:
-        0 20px 48px rgba(20,70,45,.09);
-}
-
-.feature-icon{
-    position:relative;
-
-    width:48px;
-    height:48px;
-
-    border-radius:12px;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    background:#edf9f2;
-
-    color:#15965b;
-
-    font-size:21px;
-
-    margin-bottom:20px;
-
-    transition:.4s cubic-bezier(.2,.8,.2,1);
-}
-
-.feature-card:hover .feature-icon{
-    transform:
-        rotate(-7deg)
-        scale(1.1);
-
-    background:#19a463;
-
-    color:white;
-}
-
-.feature-card h3{
-    position:relative;
-
-    color:#173729;
-
-    font-size:17px;
-
+.personal-item small{
+    display:block;
+    color:#82948a;
     margin-bottom:8px;
 }
 
-.feature-card p{
-    position:relative;
-
-    color:#758079;
-
-    font-size:13px;
-
-    line-height:1.7;
+.personal-item strong{
+    color:var(--dark);
+    font-size:20px;
 }
 
+/* =========================
+   FEATURES
+========================= */
 
-/* =====================================================
-   LEARNING
-===================================================== */
-
-.learning{
-    background:#f8faf9;
-}
-
-.learning-grid{
+.feature-grid{
     display:grid;
-
-    grid-template-columns:.85fr 1.15fr;
-
-    gap:75px;
-
-    align-items:center;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
 }
 
-.learning-copy .section-label{
-    display:block;
+.feature-card{
+    background:#fff;
+    border:1px solid var(--border);
+    padding:28px;
+    border-radius:20px;
+    transition:.3s;
+}
 
+.feature-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 18px 40px rgba(15,81,50,.09);
+}
+
+.feature-icon{
+    width:50px;
+    height:50px;
+    border-radius:14px;
+    background:#eaf8f0;
+    color:var(--green);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:22px;
+    margin-bottom:20px;
+}
+
+.feature-card h3{
+    color:var(--dark);
     margin-bottom:10px;
 }
 
-.learning-copy h2{
-    color:#112f21;
-
-    font-size:42px;
-
-    line-height:1.13;
-
-    letter-spacing:-1.5px;
-
-    margin-bottom:18px;
+.feature-card p{
+    color:#6b7f75;
+    line-height:1.7;
+    font-size:14px;
 }
 
-.learning-copy p{
-    color:#69766f;
+/* =========================
+   LESSONS
+========================= */
 
-    font-size:15px;
-
-    line-height:1.8;
-
-    margin-bottom:26px;
-}
-
-.learning-list{
-    display:flex;
-
-    flex-direction:column;
-
-    gap:12px;
-}
-
-.learning-list div{
-    display:flex;
-
-    align-items:center;
-
-    gap:11px;
-
-    color:#415149;
-
-    font-size:13px;
-
-    font-weight:650;
-
-    transition:.3s;
-}
-
-.learning-list div:hover{
-    transform:translateX(6px);
-
-    color:#15965b;
-}
-
-.check{
-    width:24px;
-    height:24px;
-
-    flex-shrink:0;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    border-radius:50%;
-
-    background:#ddf5e6;
-
-    color:#139359;
-
-    font-size:12px;
-
-    font-weight:900;
-
-    transition:.3s;
-}
-
-.learning-list div:hover .check{
-    background:#19a463;
-    color:white;
-
-    transform:rotate(360deg);
+.lessons{
+    background:#eef7f1;
 }
 
 .lesson-grid{
     display:grid;
-
-    grid-template-columns:1fr 1fr;
-
-    gap:15px;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
 }
 
-.lesson-card{
-    padding:23px;
-
-    background:white;
-
-    border:1px solid #e4ebe6;
-
-    border-radius:15px;
-
-    transition:.4s ease;
-
-    position:relative;
-
-    overflow:hidden;
-}
-
-.lesson-card::after{
-    content:"";
-
-    position:absolute;
-
-    width:5px;
-    height:0;
-
-    left:0;
-    bottom:0;
-
-    background:#19a463;
-
-    transition:.4s ease;
-}
-
-.lesson-card:hover::after{
-    height:100%;
-}
-
-.lesson-card:hover{
-    transform:
-        translateY(-6px)
-        translateX(2px);
-
-    box-shadow:
-        0 17px 40px rgba(20,70,45,.08);
+.lesson{
+    background:#fff;
+    padding:28px;
+    border-radius:20px;
+    border:1px solid #dce9e1;
 }
 
 .lesson-number{
-    color:#19a463;
-
-    font-size:10px;
-
+    color:var(--green2);
     font-weight:900;
-
-    letter-spacing:1px;
-}
-
-.lesson-card h3{
-    color:#193b2b;
-
-    font-size:16px;
-
-    margin:8px 0;
-}
-
-.lesson-card p{
-    color:#77827c;
-
-    font-size:12px;
-
-    line-height:1.7;
-}
-
-
-/* =====================================================
-   STATS
-===================================================== */
-
-.stats{
-    background:#0e3925;
-
-    color:white;
-
-    padding:70px 0;
-
-    position:relative;
-
-    overflow:hidden;
-}
-
-.stats::before,
-.stats::after{
-    content:"";
-
-    position:absolute;
-
-    border:1px solid rgba(255,255,255,.05);
-
-    border-radius:50%;
-
-    animation:
-        rotateSlow 20s linear infinite;
-}
-
-.stats::before{
-    width:300px;
-    height:300px;
-
-    left:-160px;
-    top:-160px;
-}
-
-.stats::after{
-    width:250px;
-    height:250px;
-
-    right:-130px;
-    bottom:-140px;
-
-    animation-direction:reverse;
-}
-
-.stats-grid{
-    position:relative;
-    z-index:2;
-
-    display:grid;
-
-    grid-template-columns:repeat(4,1fr);
-}
-
-.stat{
-    text-align:center;
-
-    border-right:1px solid rgba(255,255,255,.1);
-
-    transition:.3s;
-}
-
-.stat:hover{
-    transform:translateY(-5px);
-}
-
-.stat:last-child{
-    border:0;
-}
-
-.stat strong{
-    display:block;
-
-    font-size:36px;
-
-    letter-spacing:-1px;
-
-    color:#51d991;
-
-    animation:
-        numberFloat 3s ease-in-out infinite;
-}
-
-.stat:nth-child(2) strong{
-    animation-delay:.3s;
-}
-
-.stat:nth-child(3) strong{
-    animation-delay:.6s;
-}
-
-.stat:nth-child(4) strong{
-    animation-delay:.9s;
-}
-
-.stat span{
-    color:#aec0b6;
-
-    font-size:11px;
-}
-
-
-/* =====================================================
-   AI SECTION
-===================================================== */
-
-.ai-section{
-    background:white;
-}
-
-.ai-panel{
-    background:#f1faf5;
-
-    border:1px solid #d9eee1;
-
-    border-radius:22px;
-
-    padding:50px;
-
-    display:grid;
-
-    grid-template-columns:1fr 1fr;
-
-    gap:60px;
-
-    align-items:center;
-
-    position:relative;
-
-    overflow:hidden;
-}
-
-.ai-panel::before{
-    content:"";
-
-    position:absolute;
-
-    width:260px;
-    height:260px;
-
-    border-radius:50%;
-
-    border:1px solid rgba(25,164,99,.08);
-
-    right:-100px;
-    top:-120px;
-
-    animation:
-        rotateSlow 18s linear infinite;
-}
-
-.ai-copy{
-    position:relative;
-    z-index:2;
-}
-
-.ai-badge{
-    display:inline-flex;
-
-    align-items:center;
-
-    gap:8px;
-
-    color:#15945a;
-
-    font-size:11px;
-
-    font-weight:800;
-
-    text-transform:uppercase;
-
-    letter-spacing:1.3px;
-}
-
-.ai-badge-dot{
-    width:7px;
-    height:7px;
-
-    border-radius:50%;
-
-    background:#1bb66a;
-
-    animation:
-        dotPulse 2s ease-in-out infinite;
-}
-
-.ai-copy h2{
-    color:#102f20;
-
-    font-size:38px;
-
-    line-height:1.15;
-
-    letter-spacing:-1.2px;
-
-    margin:10px 0 14px;
-}
-
-.ai-copy p{
-    color:#6c7871;
-
-    font-size:14px;
-
-    line-height:1.8;
-
-    max-width:480px;
-}
-
-.ai-preview{
-    position:relative;
-    z-index:2;
-
-    background:white;
-
-    border:1px solid #e0ebe4;
-
-    border-radius:17px;
-
-    overflow:hidden;
-
-    box-shadow:
-        0 20px 45px rgba(20,70,45,.08);
-
-    animation:
-        previewFloat 4s ease-in-out infinite;
-}
-
-.ai-preview:hover{
-    animation-play-state:paused;
-
-    transform:translateY(-5px);
-}
-
-.ai-preview-head{
-    padding:14px 16px;
-
-    background:#103b27;
-
-    color:white;
-
-    display:flex;
-
-    align-items:center;
-
-    gap:10px;
-}
-
-.ai-avatar{
-    width:33px;
-    height:33px;
-
-    border-radius:9px;
-
-    background:#20b86d;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    animation:
-        avatarPulse 2.5s ease-in-out infinite;
-}
-
-.ai-preview-head strong{
-    display:block;
-
-    font-size:11px;
-}
-
-.ai-preview-head small{
-    display:block;
-
-    color:#a7c1b3;
-
-    font-size:9px;
-}
-
-.ai-preview-body{
-    padding:17px;
-}
-
-.preview-message{
-    width:80%;
-
-    padding:10px 12px;
-
-    border-radius:11px;
-
-    background:#f2f6f3;
-
-    color:#526058;
-
-    font-size:11px;
-
-    margin-bottom:11px;
-
-    animation:
-        messageIn .6s ease both;
-}
-
-.preview-message.user{
-    margin-left:auto;
-
-    background:#19a463;
-
-    color:white;
-
-    animation-delay:.2s;
-}
-
-.ai-suggestions{
-    display:flex;
-
-    gap:7px;
-
-    flex-wrap:wrap;
-
-    margin-top:15px;
-}
-
-.ai-suggestions span{
-    border:1px solid #dce8df;
-
-    border-radius:20px;
-
-    padding:6px 9px;
-
-    font-size:9px;
-
-    color:#607069;
-
-    cursor:pointer;
-
-    transition:.3s;
-}
-
-.ai-suggestions span:hover{
-    background:#19a463;
-
-    color:white;
-
-    border-color:#19a463;
-
-    transform:translateY(-2px);
-}
-
-
-/* =====================================================
-   CTA
-===================================================== */
-
-.cta{
-    padding:95px 0;
-
-    background:#f8faf9;
-}
-
-.cta-box{
-    background:#0f5132;
-
-    border-radius:22px;
-
-    padding:65px 30px;
-
-    text-align:center;
-
-    position:relative;
-
-    overflow:hidden;
-
-    animation:
-        ctaGlow 4s ease-in-out infinite;
-}
-
-.cta-box::before{
-    content:"";
-
-    position:absolute;
-
-    width:300px;
-    height:300px;
-
-    border-radius:50%;
-
-    background:rgba(52,207,126,.1);
-
-    top:-170px;
-    right:-70px;
-
-    animation:
-        floatCircle 5s ease-in-out infinite;
-}
-
-.cta-box::after{
-    content:"";
-
-    position:absolute;
-
-    width:220px;
-    height:220px;
-
-    border:1px solid rgba(255,255,255,.06);
-
-    border-radius:50%;
-
-    left:-120px;
-    bottom:-120px;
-
-    animation:
-        rotateSlow 15s linear infinite;
-}
-
-.cta-box h2{
-    position:relative;
-    z-index:2;
-
-    color:white;
-
-    font-size:41px;
-
-    line-height:1.15;
-
-    letter-spacing:-1.3px;
-
-    margin-bottom:14px;
-}
-
-.cta-box p{
-    position:relative;
-    z-index:2;
-
-    max-width:570px;
-
-    margin:0 auto 27px;
-
-    color:#bdd0c5;
-
-    font-size:14px;
-}
-
-.cta-box .btn{
-    position:relative;
-    z-index:2;
-
-    background:#39cf82;
-
-    color:#0b3924;
-}
-
-.cta-box .btn:hover{
-    background:white;
-
-    transform:
-        translateY(-4px)
-        scale(1.02);
-}
-
-
-/* =====================================================
-   FOOTER
-===================================================== */
-
-footer{
-    background:#092a1b;
-
-    color:white;
-
-    padding:70px 0 25px;
-
-    position:relative;
-
-    overflow:hidden;
-}
-
-footer::before{
-    content:"";
-
-    position:absolute;
-
-    width:400px;
-    height:400px;
-
-    border-radius:50%;
-
-    border:1px solid rgba(255,255,255,.025);
-
-    right:-200px;
-    top:-200px;
-
-    animation:
-        rotateSlow 25s linear infinite;
-}
-
-.footer-grid{
-    position:relative;
-    z-index:2;
-
-    display:grid;
-
-    grid-template-columns:1.25fr .7fr .7fr 1.25fr;
-
-    gap:50px;
-
-    padding-bottom:50px;
-}
-
-.footer-brand .logo{
-    color:white;
-
-    margin-bottom:16px;
-}
-
-.footer-brand p{
-    max-width:300px;
-
-    color:#91a89b;
-
-    font-size:12px;
-
-    line-height:1.8;
-}
-
-.footer-heading{
-    font-size:12px;
-
-    margin-bottom:17px;
-
-    color:white;
-}
-
-.footer-links a{
-    display:block;
-
-    color:#8fa499;
-
-    font-size:12px;
-
-    margin:10px 0;
-
-    transition:.25s;
-}
-
-.footer-links a:hover{
-    color:#43d98e;
-
-    transform:translateX(4px);
-}
-
-
-/* Footer AI */
-
-.footer-ai{
-    background:#103925;
-
-    border:1px solid rgba(255,255,255,.08);
-
-    border-radius:14px;
-
-    padding:17px;
-
-    transition:.3s ease;
-}
-
-.footer-ai:hover{
-    border-color:rgba(48,210,129,.35);
-
-    transform:translateY(-4px);
-
-    box-shadow:
-        0 15px 35px rgba(0,0,0,.15);
-}
-
-.footer-ai-title{
-    display:flex;
-
-    align-items:center;
-
-    gap:8px;
-
-    margin-bottom:8px;
-}
-
-.online-dot{
-    width:7px;
-    height:7px;
-
-    border-radius:50%;
-
-    background:#38d888;
-
-    box-shadow:
-        0 0 0 4px rgba(56,216,136,.09);
-
-    animation:
-        dotPulse 2s ease-in-out infinite;
-}
-
-.footer-ai-title strong{
-    font-size:12px;
-}
-
-.footer-ai p{
-    color:#91a89b;
-
-    font-size:10px;
-
-    line-height:1.6;
-
     margin-bottom:12px;
 }
 
-.footer-ai-input{
-    display:flex;
-
-    background:#082a1b;
-
-    border:1px solid rgba(255,255,255,.08);
-
-    border-radius:8px;
-
-    overflow:hidden;
-
-    transition:.3s;
+.lesson h3{
+    color:var(--dark);
+    margin-bottom:10px;
 }
 
-.footer-ai-input:focus-within{
-    border-color:#20b66c;
-
-    box-shadow:
-        0 0 0 3px rgba(32,182,108,.08);
+.lesson p{
+    color:#687c72;
+    line-height:1.7;
 }
 
-.footer-ai-input input{
-    width:100%;
-
-    min-width:0;
-
-    border:0;
-
-    outline:0;
-
-    background:transparent;
-
-    color:white;
-
-    padding:10px;
-
-    font-size:10px;
+.lesson, .personal-item, .ai-preview{
+    transition:transform .3s ease, box-shadow .3s ease, border-color .3s ease;
 }
 
-.footer-ai-input button{
-    border:0;
-
-    background:#19a463;
-
-    color:white;
-
-    padding:0 13px;
-
-    cursor:pointer;
-
-    transition:.25s;
+.lesson:hover, .personal-item:hover, .ai-preview:hover{
+    transform:translateY(-5px);
+    box-shadow:0 16px 35px rgba(15,81,50,.08);
 }
 
-.footer-ai-input button:hover{
-    background:#35cf82;
+/* =========================
+   STATS
+========================= */
 
-    transform:scale(1.05);
+.stats{
+    padding:70px 25px;
+    background:var(--dark);
+    color:#fff;
+}
+
+.stats-grid{
+    max-width:1100px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+    text-align:center;
+}
+
+.stat h3{
+    font-size:38px;
+    margin-bottom:7px;
+}
+
+.stat p{
+    color:#b9cec2;
+}
+
+/* =========================
+   AI
+========================= */
+
+.ai-section{
+    background:#fff;
+}
+
+.ai-box{
+    max-width:1000px;
+    margin:auto;
+    background:#eff8f2;
+    border-radius:28px;
+    padding:40px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:40px;
+    align-items:center;
+}
+
+.ai-box h2{
+    font-size:40px;
+    color:var(--dark);
+    margin-bottom:15px;
+}
+
+.ai-box p{
+    color:#63776d;
+    line-height:1.8;
+}
+
+.ai-preview{
+    background:#fff;
+    border-radius:20px;
+    padding:20px;
+    border:1px solid #dce9e1;
+}
+
+.ai-message{
+    padding:12px 15px;
+    background:#f0f5f2;
+    border-radius:12px;
+    margin-bottom:10px;
+    color:#466052;
+    font-size:14px;
+}
+
+.ai-message.user{
+    background:#e2f7eb;
+    text-align:right;
+    color:var(--green);
+}
+
+.help-section .feature-card .hero-btn{
+    display:inline-block;
+    margin-top:18px;
+}
+
+/* =========================
+   CTA
+========================= */
+
+.cta{
+    padding:100px 25px;
+    text-align:center;
+    background:
+        radial-gradient(circle at top right,rgba(255,255,255,.12),transparent 30%),
+        var(--green);
+    color:#fff;
+}
+
+.cta h2{
+    font-size:clamp(35px,5vw,55px);
+    margin-bottom:15px;
+}
+
+.cta p{
+    max-width:650px;
+    margin:0 auto 28px;
+    line-height:1.8;
+    color:#d4e8dc;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    background:#092619;
+    color:#fff;
+    padding:65px 25px 25px;
+}
+
+.footer-container{
+    max-width:1200px;
+    margin:auto;
+}
+
+.footer-grid{
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr 1.5fr;
+    gap:40px;
+    padding-bottom:40px;
+}
+
+.footer-brand{
+    font-size:27px;
+    font-weight:900;
+    margin-bottom:15px;
+}
+
+.footer-brand span{
+    color:#20b66c;
+}
+
+.footer-column p{
+    color:#a8bdb1;
+    line-height:1.8;
+    font-size:14px;
+}
+
+.footer-column h4{
+    margin-bottom:17px;
+}
+
+.footer-column a{
+    display:block;
+    color:#a8bdb1;
+    font-size:14px;
+    margin-bottom:11px;
+    transition:.2s;
+}
+
+.footer-column a:hover{
+    color:#fff;
 }
 
 .footer-bottom{
-    position:relative;
-    z-index:2;
-
-    border-top:1px solid rgba(255,255,255,.08);
-
-    padding-top:22px;
-
+    border-top:1px solid rgba(255,255,255,.1);
+    padding-top:20px;
+    color:#89a094;
+    font-size:13px;
     display:flex;
-
     justify-content:space-between;
-
-    gap:20px;
-
-    color:#71887c;
-
-    font-size:10px;
+    gap:15px;
+    flex-wrap:wrap;
 }
 
+/* =========================
+   FLOATING AI
+========================= */
 
-/* =====================================================
-   FLOATING CHAT
-===================================================== */
-
-.chat-toggle{
+.ai-floating{
     position:fixed;
-
     right:25px;
     bottom:25px;
-
-    width:57px;
-    height:57px;
-
-    border:0;
-
-    border-radius:50%;
-
-    background:#19a463;
-
-    color:white;
-
-    cursor:pointer;
-
     z-index:2000;
-
-    font-size:22px;
-
-    box-shadow:
-        0 12px 30px rgba(15,81,50,.3);
-
-    transition:.3s;
-
-    animation:
-        chatFloat 3s ease-in-out infinite;
 }
 
-.chat-toggle::before{
-    content:"";
-
-    position:absolute;
-
-    inset:-7px;
-
-    border:2px solid rgba(25,164,99,.2);
-
+.ai-button{
+    width:58px;
+    height:58px;
+    border:0;
     border-radius:50%;
-
-    animation:
-        chatRing 2s ease-out infinite;
-}
-
-.chat-toggle:hover{
-    transform:scale(1.1);
-
-    background:#0f5132;
+    background:var(--green);
+    color:#fff;
+    font-size:22px;
+    box-shadow:0 12px 30px rgba(0,0,0,.2);
 }
 
 .chat-window{
-    position:fixed;
-
-    right:25px;
-    bottom:92px;
-
-    width:360px;
-
-    max-width:calc(100% - 30px);
-
-    background:white;
-
-    border:1px solid #e1e9e3;
-
-    border-radius:17px;
-
+    position:absolute;
+    right:0;
+    bottom:70px;
+    width:330px;
+    background:#fff;
+    border:1px solid #dce8e1;
+    border-radius:20px;
+    box-shadow:0 20px 60px rgba(0,0,0,.18);
     overflow:hidden;
-
-    box-shadow:
-        0 25px 70px rgba(0,0,0,.18);
-
-    z-index:2100;
-
     display:none;
 }
 
 .chat-window.active{
     display:block;
-
-    animation:
-        chatIn .3s cubic-bezier(.2,.8,.2,1);
+    animation:fadeUp .3s ease;
 }
 
-.chat-head{
-    background:#103b27;
-
-    color:white;
-
-    padding:15px;
-
+.chat-header{
+    background:var(--green);
+    color:#fff;
+    padding:16px;
     display:flex;
-
-    align-items:center;
-
     justify-content:space-between;
 }
 
-.chat-profile{
-    display:flex;
-
-    align-items:center;
-
-    gap:9px;
-}
-
-.chat-profile-icon{
-    width:37px;
-    height:37px;
-
-    border-radius:10px;
-
-    background:#20b86d;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    animation:
-        avatarPulse 2.5s ease-in-out infinite;
-}
-
-.chat-profile strong{
-    display:block;
-
-    font-size:12px;
-}
-
-.chat-profile small{
-    color:#a5bdb0;
-
-    font-size:9px;
-}
-
-.close-chat{
+.chat-header button{
     border:0;
-
-    background:transparent;
-
-    color:white;
-
-    cursor:pointer;
-
-    font-size:22px;
-
-    transition:.3s;
+    background:none;
+    color:#fff;
 }
 
-.close-chat:hover{
-    transform:rotate(90deg);
-
-    color:#48db91;
-}
-
-.chat-messages{
-    height:310px;
-
+.chat-body{
+    height:280px;
     padding:15px;
-
     overflow-y:auto;
-
-    background:#f7faf8;
-}
-
-.chat-message{
-    max-width:84%;
-
-    padding:10px 12px;
-
-    border-radius:11px;
-
-    font-size:11px;
-
-    margin-bottom:10px;
-
-    animation:
-        messageIn .3s ease both;
-}
-
-.chat-message.bot{
-    background:white;
-
-    border:1px solid #e5ebe7;
-
-    color:#4d5c54;
-}
-
-.chat-message.user{
-    margin-left:auto;
-
-    background:#19a463;
-
-    color:white;
 }
 
 .chat-input{
     display:flex;
-
-    padding:10px;
-
-    border-top:1px solid #e5ebe7;
-
-    background:white;
+    border-top:1px solid #e4ece7;
 }
 
 .chat-input input{
     flex:1;
-
-    min-width:0;
-
-    border:1px solid #dce5df;
-
-    border-right:0;
-
-    outline:0;
-
-    padding:10px;
-
-    border-radius:8px 0 0 8px;
-
-    font-size:11px;
-
-    transition:.3s;
-}
-
-.chat-input input:focus{
-    border-color:#19a463;
+    border:0;
+    padding:13px;
+    outline:none;
 }
 
 .chat-input button{
     border:0;
-
-    padding:0 14px;
-
-    background:#19a463;
-
-    color:white;
-
-    border-radius:0 8px 8px 0;
-
-    cursor:pointer;
-
-    transition:.3s;
+    background:var(--green);
+    color:#fff;
+    padding:0 17px;
 }
 
-.chat-input button:hover{
-    background:#0f5132;
-}
-
-
-/* =====================================================
-   REVEAL ANIMATION
-===================================================== */
-
-.reveal{
-    opacity:0;
-
-    transform:translateY(35px);
-
-    transition:
-        opacity .8s ease,
-        transform .8s cubic-bezier(.2,.8,.2,1);
-}
-
-.reveal.active{
-    opacity:1;
-
-    transform:translateY(0);
-}
-
-.reveal-left{
-    opacity:0;
-
-    transform:translateX(-40px);
-
-    transition:
-        opacity .8s ease,
-        transform .8s cubic-bezier(.2,.8,.2,1);
-}
-
-.reveal-left.active{
-    opacity:1;
-
-    transform:translateX(0);
-}
-
-.reveal-right{
-    opacity:0;
-
-    transform:translateX(40px);
-
-    transition:
-        opacity .8s ease,
-        transform .8s cubic-bezier(.2,.8,.2,1);
-}
-
-.reveal-right.active{
-    opacity:1;
-
-    transform:translateX(0);
-}
-
-
-/* =====================================================
-   KEYFRAMES
-===================================================== */
-
-@keyframes navDrop{
-
-    from{
-        opacity:0;
-        transform:translateY(-20px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-
-}
-
-@keyframes heroIn{
-
-    from{
-        opacity:0;
-        transform:translateY(35px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-
-}
+/* =========================
+   ANIMATIONS
+========================= */
 
 @keyframes fadeUp{
-
     from{
         opacity:0;
-        transform:translateY(20px);
+        transform:translateY(25px);
     }
-
     to{
         opacity:1;
         transform:translateY(0);
     }
-
 }
 
-@keyframes fadeDown{
-
-    from{
-        opacity:0;
-        transform:translateY(-12px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-
-}
-
-@keyframes fadeIn{
-
-    from{
-        opacity:0;
-    }
-
-    to{
-        opacity:1;
-    }
-
-}
-
-@keyframes dashboardFloat{
-
-    0%,100%{
-        transform:
-            rotate(1.5deg)
-            translateY(0);
-    }
-
-    50%{
-        transform:
-            rotate(1.5deg)
-            translateY(-11px);
-    }
-
-}
-
-@keyframes floatOne{
-
+@keyframes float{
     0%,100%{
         transform:translateY(0);
     }
-
     50%{
         transform:translateY(-12px);
     }
-
 }
 
-@keyframes floatTwo{
-
-    0%,100%{
-        transform:translateY(0);
-    }
-
-    50%{
-        transform:translateY(9px);
-    }
-
-}
-
-@keyframes rotateSlow{
-
-    from{
-        transform:rotate(0deg);
-    }
-
-    to{
-        transform:rotate(360deg);
-    }
-
-}
-
-@keyframes dotPulse{
-
-    0%,100%{
-        transform:scale(1);
-        box-shadow:0 0 0 0 rgba(32,182,108,.35);
-    }
-
-    50%{
-        transform:scale(1.25);
-        box-shadow:0 0 0 7px rgba(32,182,108,0);
-    }
-
-}
-
-@keyframes softPulse{
-
-    0%,100%{
-        box-shadow:0 0 0 rgba(25,164,99,0);
-    }
-
-    50%{
-        box-shadow:0 5px 25px rgba(25,164,99,.08);
-    }
-
-}
-
-@keyframes textFloat{
-
-    0%,100%{
-        transform:translateY(0);
-    }
-
-    50%{
-        transform:translateY(-3px);
-    }
-
-}
-
-@keyframes checkPulse{
-
-    0%,100%{
-        transform:scale(1);
-    }
-
-    50%{
-        transform:scale(1.15);
-    }
-
-}
-
-@keyframes menuRotate{
-
-    0%,100%{
-        transform:rotate(0deg);
-    }
-
-    50%{
-        transform:rotate(8deg);
-    }
-
-}
-
-@keyframes numberGlow{
-
-    0%,100%{
-        text-shadow:0 0 0 rgba(81,217,145,0);
-    }
-
-    50%{
-        text-shadow:0 0 15px rgba(81,217,145,.15);
-    }
-
-}
-
-@keyframes barGrow{
-
+@keyframes grow{
     from{
         transform:scaleY(0);
     }
-
     to{
         transform:scaleY(1);
     }
-
 }
 
-@keyframes progressGrow{
+/* =========================
+   RESPONSIVE
+========================= */
 
-    from{
-        transform:scaleX(0);
+@media(prefers-reduced-motion:reduce){
+    *, *::before, *::after{
+        animation-duration:.01ms !important;
+        animation-iteration-count:1 !important;
+        scroll-behavior:auto !important;
+        transition-duration:.01ms !important;
     }
-
-    to{
-        transform:scaleX(1);
-    }
-
 }
 
-@keyframes scoreSpin{
+@media(max-width:900px){
 
-    0%{
-        transform:rotate(0deg);
-    }
-
-    100%{
-        transform:rotate(360deg);
-    }
-
-}
-
-@keyframes iconBounce{
-
-    0%,100%{
-        transform:translateY(0);
-    }
-
-    50%{
-        transform:translateY(-4px);
-    }
-
-}
-
-@keyframes floatCircle{
-
-    0%,100%{
-        transform:translate(0,0);
-    }
-
-    50%{
-        transform:translate(-8px,8px);
-    }
-
-}
-
-@keyframes lineGrow{
-
-    0%,100%{
-        transform:scaleX(.6);
-        opacity:.6;
-    }
-
-    50%{
-        transform:scaleX(1.2);
-        opacity:1;
-    }
-
-}
-
-@keyframes numberFloat{
-
-    0%,100%{
-        transform:translateY(0);
-    }
-
-    50%{
-        transform:translateY(-3px);
-    }
-
-}
-
-@keyframes previewFloat{
-
-    0%,100%{
-        transform:translateY(0);
-    }
-
-    50%{
-        transform:translateY(-6px);
-    }
-
-}
-
-@keyframes avatarPulse{
-
-    0%,100%{
-        box-shadow:0 0 0 rgba(32,184,109,0);
-    }
-
-    50%{
-        box-shadow:0 0 20px rgba(32,184,109,.25);
-    }
-
-}
-
-@keyframes messageIn{
-
-    from{
-        opacity:0;
-        transform:translateY(7px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-
-}
-
-@keyframes ctaGlow{
-
-    0%,100%{
-        box-shadow:0 0 0 rgba(25,164,99,0);
-    }
-
-    50%{
-        box-shadow:
-            0 20px 60px rgba(25,164,99,.08);
-    }
-
-}
-
-@keyframes chatFloat{
-
-    0%,100%{
-        transform:translateY(0);
-    }
-
-    50%{
-        transform:translateY(-5px);
-    }
-
-}
-
-@keyframes chatRing{
-
-    0%{
-        transform:scale(.8);
-        opacity:.8;
-    }
-
-    100%{
-        transform:scale(1.5);
-        opacity:0;
-    }
-
-}
-
-@keyframes chatIn{
-
-    from{
-        opacity:0;
-        transform:
-            translateY(18px)
-            scale(.95);
-    }
-
-    to{
-        opacity:1;
-        transform:
-            translateY(0)
-            scale(1);
-    }
-
-}
-
-
-/* =====================================================
-   TABLET
-===================================================== */
-
-@media(max-width:950px){
-
-    .nav-links{
-        gap:18px;
-    }
-
-    .hero-grid{
+    .hero-container{
         grid-template-columns:1fr;
-
-        text-align:center;
-
-        gap:45px;
-    }
-
-    .hero-description{
-        margin-left:auto;
-        margin-right:auto;
-    }
-
-    .hero-buttons,
-    .hero-note{
-        justify-content:center;
-    }
-
-    .dashboard-wrapper{
-        min-height:480px;
     }
 
     .feature-grid{
-        grid-template-columns:1fr 1fr;
+        grid-template-columns:repeat(2,1fr);
     }
 
-    .learning-grid{
-        grid-template-columns:1fr;
-
-        gap:45px;
-    }
-
-    .learning-copy{
-        text-align:center;
-    }
-
-    .learning-copy p{
-        margin-left:auto;
-        margin-right:auto;
-
-        max-width:650px;
-    }
-
-    .learning-list{
-        align-items:center;
-    }
-
-    .ai-panel{
-        grid-template-columns:1fr;
-    }
-
-    .footer-grid{
-        grid-template-columns:1fr 1fr;
-    }
-
-}
-
-
-/* =====================================================
-   MOBILE
-===================================================== */
-
-@media(max-width:700px){
-
-    .container{
-        width:min(92%,520px);
-    }
-
-    .navbar{
-        height:70px;
-    }
-
-    .menu-btn{
-        display:block;
-    }
-
-    .nav-links{
-        display:none;
-
-        position:absolute;
-
-        left:0;
-        top:70px;
-
-        width:100%;
-
-        padding:20px;
-
-        flex-direction:column;
-
-        align-items:stretch;
-
-        gap:7px;
-
-        background:white;
-
-        border-bottom:1px solid #e5ebe7;
-
-        box-shadow:
-            0 15px 30px rgba(0,0,0,.05);
-
-        animation:
-            mobileMenu .3s ease;
-    }
-
-    .nav-links.active{
-        display:flex;
-    }
-
-    .nav-links a{
-        padding:12px;
-
-        text-align:center;
-    }
-
-    .hero{
-        padding:65px 0;
-    }
-
-    .hero h1{
-        font-size:46px;
-
-        letter-spacing:-2.5px;
-    }
-
-    .hero-description{
-        font-size:15px;
-    }
-
-    .dashboard-wrapper{
-        min-height:430px;
-    }
-
-    .dashboard{
-        width:350px;
-    }
-
-    .floating-card.goal{
-        left:-2px;
-
-        top:50px;
-    }
-
-    .floating-card.score{
-        right:-2px;
-
-        bottom:45px;
-    }
-
-    .section{
-        padding:75px 0;
-    }
-
-    .section-header h2,
-    .learning-copy h2{
-        font-size:33px;
-    }
-
-    .feature-grid{
-        grid-template-columns:1fr;
-    }
-
-    .stats-grid{
-        grid-template-columns:1fr 1fr;
-
-        gap:30px 0;
-    }
-
-    .stat{
-        border:0;
-    }
-
-    .stat strong{
-        font-size:31px;
+    .personal-card{
+        grid-template-columns:repeat(2,1fr);
     }
 
     .lesson-grid{
         grid-template-columns:1fr;
     }
 
-    .ai-panel{
-        padding:30px 20px;
+    .stats-grid{
+        grid-template-columns:repeat(2,1fr);
     }
 
-    .ai-copy h2{
-        font-size:32px;
+    .ai-box{
+        grid-template-columns:1fr;
     }
 
-    .cta{
-        padding:70px 0;
+    .footer-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:700px){
+
+    .auth-box,
+    .setup-box{
+        padding:25px 20px;
+        border-radius:20px;
     }
 
-    .cta-box{
-        padding:50px 20px;
+    .welcome-content h1{
+        font-size:43px;
     }
 
-    .cta-box h2{
-        font-size:32px;
+    .option-grid{
+        grid-template-columns:1fr;
+    }
+
+    .nav-links{
+        position:absolute;
+        top:75px;
+        left:0;
+        right:0;
+        background:#fff;
+        display:none;
+        flex-direction:column;
+        align-items:flex-start;
+        padding:20px 25px;
+        border-bottom:1px solid #e5eee9;
+        gap:18px;
+    }
+
+    .nav-links.active{
+        display:flex;
+    }
+
+    .menu-btn{
+        display:block;
+    }
+
+    .hero{
+        padding:65px 20px;
+    }
+
+    .section{
+        padding:70px 20px;
+    }
+
+    .trust-inner{
+        grid-template-columns:1fr;
+    }
+
+    .feature-grid{
+        grid-template-columns:1fr;
+    }
+
+    .personal-card{
+        grid-template-columns:1fr;
+    }
+
+    .stats-grid{
+        grid-template-columns:1fr 1fr;
     }
 
     .footer-grid{
         grid-template-columns:1fr;
-
-        gap:30px;
     }
 
-    .footer-bottom{
-        flex-direction:column;
+    .ai-box{
+        padding:25px;
+    }
+
+    .ai-box h2{
+        font-size:32px;
     }
 
     .chat-window{
-        right:15px;
-
-        bottom:88px;
+        width:calc(100vw - 30px);
+        right:-5px;
     }
-
-    .chat-toggle{
-        right:18px;
-
-        bottom:18px;
-    }
-
 }
 
+@media(max-width:450px){
 
-/* =====================================================
-   SMALL PHONES
-===================================================== */
-
-@media(max-width:400px){
-
-    .hero h1{
-        font-size:40px;
+    .welcome-screen,
+    .auth-screen,
+    .setup-screen{
+        padding:18px;
     }
 
-    .dashboard{
-        width:315px;
-
-        padding:17px;
+    .brand{
+        font-size:30px;
     }
 
-    .floating-card{
-        transform:scale(.86);
+    .welcome-content p{
+        font-size:16px;
     }
 
-    .floating-card.goal{
-        left:-15px;
+    .setup-actions{
+        flex-direction:column;
     }
 
-    .floating-card.score{
-        right:-15px;
+    .stats-grid{
+        grid-template-columns:1fr;
     }
-
 }
-
-
-/* =====================================================
-   MOBILE MENU ANIMATION
-===================================================== */
-
-@keyframes mobileMenu{
-
-    from{
-        opacity:0;
-        transform:translateY(-10px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-
-}
-
-
-/* =====================================================
-   REDUCE MOTION ACCESSIBILITY
-===================================================== */
-
-@media(prefers-reduced-motion:reduce){
-
-    *,
-    *::before,
-    *::after{
-        animation-duration:.01ms !important;
-        animation-iteration-count:1 !important;
-        scroll-behavior:auto !important;
-        transition-duration:.01ms !important;
-    }
-
-}
-
 </style>
-
 </head>
-
 
 <body>
 
-
-<!-- =====================================================
-     SCROLL PROGRESS
-===================================================== -->
-
 <div class="scroll-progress" id="scrollProgress"></div>
 
+<section class="screen welcome-screen active" id="welcomeScreen">
 
+    <div class="welcome-content">
 
-<!-- =====================================================
-     NAVIGATION
-===================================================== -->
-
-<header>
-
-<nav class="navbar container">
-
-    <a href="#home" class="logo">
-
-        <div class="logo-mark">
-            ₦
+        <div class="brand">
+            <div class="brand-icon">₦</div>
+            BudgetBasics
         </div>
-
-        <div>
-            Budget<span>Basics</span>
-        </div>
-
-    </a>
-
-
-    <div class="nav-links" id="navLinks">
-
-        <a href="#home">
-            Home
-        </a>
-
-        <a href="#topics">
-            Learn
-        </a>
-
-        <a href="#learning">
-            Topics
-        </a>
-
-        <a href="#assistant">
-            AI Assistant
-        </a>
-
-        <a href="#start" class="nav-action">
-            Get Started
-        </a>
-
-    </div>
-
-
-    <button
-        class="menu-btn"
-        onclick="toggleMenu()"
-        aria-label="Open menu"
-    >
-        ☰
-    </button>
-
-</nav>
-
-</header>
-
-
-
-<!-- =====================================================
-     HERO
-===================================================== -->
-
-<section class="hero" id="home">
-
-<div class="container hero-grid">
-
-
-    <div class="hero-content">
-
-        <div class="eyebrow">
-
-            <span class="eyebrow-dot"></span>
-
-            Financial education made simple
-
-        </div>
-
 
         <h1>
-
             Build better
             <span>money habits.</span>
-
         </h1>
 
-
-        <p class="hero-description">
-
-            BudgetBasics helps students understand
-            budgeting, saving and responsible spending
-            through simple lessons, practical tools
-            and an intelligent AI assistant.
-
-        </p>
-
-
-        <div class="hero-buttons">
-
-            <a href="#topics" class="btn btn-primary">
-
-                Start Learning
-
-                <span>→</span>
-
-            </a>
-
-
-            <a href="#assistant" class="btn btn-secondary">
-
-                Meet the AI Assistant
-
-            </a>
-
-        </div>
-
-
-        <div class="hero-note">
-
-            <div class="hero-note-icon">
-                ✓
-            </div>
-
-            Designed for students and everyday money decisions
-
-        </div>
-
-    </div>
-
-
-
-    <!-- =================================================
-         DASHBOARD
-    ================================================= -->
-
-    <div class="dashboard-wrapper">
-
-
-        <div class="floating-card goal">
-
-            <div class="float-top">
-
-                <div class="float-icon">
-                    🎯
-                </div>
-
-                <div class="float-text">
-
-                    <strong>
-                        Savings Goal
-                    </strong>
-
-                    <small>
-                        74% completed
-                    </small>
-
-                </div>
-
-            </div>
-
-            <div class="mini-progress">
-                <div></div>
-            </div>
-
-        </div>
-
-
-
-        <div class="dashboard">
-
-
-            <div class="dashboard-header">
-
-                <div>
-
-                    <div class="dashboard-title">
-                        Personal Overview
-                    </div>
-
-                    <h3>
-                        My Budget
-                    </h3>
-
-                </div>
-
-
-                <div class="dashboard-menu">
-                    •••
-                </div>
-
-            </div>
-
-
-            <div class="balance-box">
-
-                <div class="balance-label">
-                    Available this month
-                </div>
-
-                <div class="balance-amount">
-                    ₦45,800
-                </div>
-
-                <div class="balance-change">
-                    ↑ 12.4% savings
-                </div>
-
-
-                <div class="chart">
-
-                    <div class="bar"></div>
-
-                    <div class="bar"></div>
-
-                    <div class="bar"></div>
-
-                    <div class="bar"></div>
-
-                    <div class="bar"></div>
-
-                    <div class="bar"></div>
-
-                    <div class="bar"></div>
-
-                </div>
-
-            </div>
-
-
-            <div class="dashboard-section-title">
-
-                <strong>
-                    Recent activity
-                </strong>
-
-                <span>
-                    This week
-                </span>
-
-            </div>
-
-
-            <div class="transaction">
-
-                <div class="transaction-left">
-
-                    <div class="transaction-icon">
-                        🍔
-                    </div>
-
-                    <div>
-
-                        <div class="transaction-name">
-                            Food
-                        </div>
-
-                        <div class="transaction-date">
-                            Today
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="transaction-amount">
-                    -₦3,500
-                </div>
-
-            </div>
-
-
-            <div class="transaction">
-
-                <div class="transaction-left">
-
-                    <div class="transaction-icon">
-                        🚕
-                    </div>
-
-                    <div>
-
-                        <div class="transaction-name">
-                            Transport
-                        </div>
-
-                        <div class="transaction-date">
-                            Yesterday
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="transaction-amount">
-                    -₦2,000
-                </div>
-
-            </div>
-
-
-            <div class="transaction">
-
-                <div class="transaction-left">
-
-                    <div class="transaction-icon">
-                        💰
-                    </div>
-
-                    <div>
-
-                        <div class="transaction-name">
-                            Savings
-                        </div>
-
-                        <div class="transaction-date">
-                            Monday
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="transaction-amount">
-                    +₦10,000
-                </div>
-
-            </div>
-
-
-        </div>
-
-
-        <div class="floating-card score">
-
-            <div class="float-top">
-
-                <div class="score-circle">
-                    82
-                </div>
-
-                <div class="float-text">
-
-                    <strong>
-                        Money Score
-                    </strong>
-
-                    <small>
-                        Keep improving
-                    </small>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-    </div>
-
-</div>
-
-</section>
-
-
-
-<!-- =====================================================
-     TRUST
-===================================================== -->
-
-<section class="trust">
-
-<div class="container trust-content">
-
-    <div class="trust-text">
-        LEARN THE BASICS
-    </div>
-
-    <div class="trust-item">
-        ✓ Budgeting
-    </div>
-
-    <div class="trust-item">
-        ✓ Saving
-    </div>
-
-    <div class="trust-item">
-        ✓ Smart Spending
-    </div>
-
-    <div class="trust-item">
-        ✓ Financial Planning
-    </div>
-
-    <div class="trust-item">
-        ✓ AI Guidance
-    </div>
-
-</div>
-
-</section>
-
-
-
-<!-- =====================================================
-     FEATURES
-===================================================== -->
-
-<section class="section features" id="topics">
-
-<div class="container">
-
-
-    <div class="section-header reveal">
-
-        <div class="section-label">
-            What you can learn
-        </div>
-
-        <h2>
-            Financial skills for real life.
-        </h2>
-
         <p>
-            Clear explanations and practical tools
-            designed to make money management easier
-            to understand.
+            Learn how to budget, save, spend wisely and build
+            better financial habits with BudgetBasics.
         </p>
 
-    </div>
+        <button class="start-btn" onclick="showAuth()">
+            Start Now
+        </button>
 
-
-    <div class="feature-grid">
-
-
-        <div class="feature-card reveal">
-
-            <div class="feature-icon">
-                📊
-            </div>
-
-            <h3>
-                Budgeting
-            </h3>
-
-            <p>
-                Learn how to plan your income,
-                organize expenses and create a
-                realistic personal budget.
-            </p>
-
+        <div class="welcome-small">
+            Simple • Smart • Beginner Friendly
         </div>
-
-
-        <div class="feature-card reveal">
-
-            <div class="feature-icon">
-                💰
-            </div>
-
-            <h3>
-                Saving
-            </h3>
-
-            <p>
-                Understand savings goals and
-                develop simple habits that make
-                saving more consistent.
-            </p>
-
-        </div>
-
-
-        <div class="feature-card reveal">
-
-            <div class="feature-icon">
-                🛍️
-            </div>
-
-            <h3>
-                Smart Spending
-            </h3>
-
-            <p>
-                Learn how to recognize needs,
-                wants and unnecessary spending
-                before making purchases.
-            </p>
-
-        </div>
-
-
-        <div class="feature-card reveal">
-
-            <div class="feature-icon">
-                🧮
-            </div>
-
-            <h3>
-                Money Tools
-            </h3>
-
-            <p>
-                Use simple calculators and
-                interactive tools to understand
-                your everyday financial choices.
-            </p>
-
-        </div>
-
 
     </div>
-
-</div>
 
 </section>
 
+<section class="screen auth-screen" id="authScreen">
 
+    <div class="auth-box">
 
-<!-- =====================================================
-     LEARNING
-===================================================== -->
+        <div class="auth-logo">BudgetBasics</div>
 
-<section class="section learning" id="learning">
+        <h2 class="auth-title">Welcome</h2>
 
-<div class="container learning-grid">
-
-
-    <div class="learning-copy reveal-left">
-
-        <div class="section-label">
-            Learn at your pace
-        </div>
-
-
-        <h2>
-            Understand your money before it controls you.
-        </h2>
-
-
-        <p>
-            Good financial habits begin with understanding.
-            BudgetBasics breaks down everyday money concepts
-            into simple lessons you can actually use.
+        <p class="auth-subtitle">
+            Login to continue or create your BudgetBasics account.
         </p>
 
-
-        <div class="learning-list">
-
-            <div>
-                <span class="check">✓</span>
-                Simple explanations
-            </div>
-
-            <div>
-                <span class="check">✓</span>
-                Practical examples
-            </div>
-
-            <div>
-                <span class="check">✓</span>
-                Interactive learning tools
-            </div>
-
-            <div>
-                <span class="check">✓</span>
-                Student-friendly financial lessons
-            </div>
-
-        </div>
-
-    </div>
-
-
-
-    <div class="lesson-grid reveal-right">
-
-
-        <div class="lesson-card">
-
-            <div class="lesson-number">
-                LESSON 01
-            </div>
-
-            <h3>
-                Understanding Income
-            </h3>
-
-            <p>
-                Learn how to identify your sources
-                of money and understand how much
-                you actually have available.
-            </p>
-
-        </div>
-
-
-        <div class="lesson-card">
-
-            <div class="lesson-number">
-                LESSON 02
-            </div>
-
-            <h3>
-                Building a Budget
-            </h3>
-
-            <p>
-                Create a simple plan for your money
-                and give every part of your income
-                a purpose.
-            </p>
-
-        </div>
-
-
-        <div class="lesson-card">
-
-            <div class="lesson-number">
-                LESSON 03
-            </div>
-
-            <h3>
-                Creating Savings Goals
-            </h3>
-
-            <p>
-                Turn your financial goals into
-                achievable savings targets.
-            </p>
-
-        </div>
-
-
-        <div class="lesson-card">
-
-            <div class="lesson-number">
-                LESSON 04
-            </div>
-
-            <h3>
-                Responsible Spending
-            </h3>
-
-            <p>
-                Understand the difference between
-                needs and wants and make thoughtful
-                spending decisions.
-            </p>
-
-        </div>
-
-
-    </div>
-
-</div>
-
-</section>
-
-
-
-<!-- =====================================================
-     STATS
-===================================================== -->
-
-<section class="stats">
-
-<div class="container stats-grid">
-
-
-    <div class="stat">
-
-        <strong>
-            4+
-        </strong>
-
-        <span>
-            Core financial topics
-        </span>
-
-    </div>
-
-
-    <div class="stat">
-
-        <strong>
-            10+
-        </strong>
-
-        <span>
-            Practical learning tools
-        </span>
-
-    </div>
-
-
-    <div class="stat">
-
-        <strong>
-            24/7
-        </strong>
-
-        <span>
-            AI assistant availability
-        </span>
-
-    </div>
-
-
-    <div class="stat">
-
-        <strong>
-            100%
-        </strong>
-
-        <span>
-            Student-focused learning
-        </span>
-
-    </div>
-
-
-</div>
-
-</section>
-
-
-
-<!-- =====================================================
-     AI ASSISTANT
-===================================================== -->
-
-<section class="section ai-section" id="assistant">
-
-<div class="container">
-
-
-    <div class="ai-panel reveal">
-
-
-        <div class="ai-copy">
-
-            <div class="ai-badge">
-
-                <span class="ai-badge-dot"></span>
-
-                BudgetBasics AI
-
-            </div>
-
-
-            <h2>
-                Have a money question?
-                Ask your assistant.
-            </h2>
-
-
-            <p>
-                Whether you're trying to create your
-                first budget, understand saving or
-                decide how to manage your spending,
-                the BudgetBasics Assistant can help
-                explain the basics in simple language.
-            </p>
-
-
-            <br>
-
+        <div class="auth-tabs">
 
             <button
-                class="btn btn-primary"
-                onclick="openChat()"
-            >
-                Talk to the Assistant →
+                class="auth-tab active"
+                id="loginTab"
+                onclick="switchAuth('login')">
+                Login
+            </button>
+
+            <button
+                class="auth-tab"
+                id="signupTab"
+                onclick="switchAuth('signup')">
+                Sign Up
             </button>
 
         </div>
 
+        <form class="auth-form active" id="loginForm">
 
+            <div class="form-group">
 
-        <div class="ai-preview">
+                <label>Email</label>
 
-
-            <div class="ai-preview-head">
-
-                <div class="ai-avatar">
-                    🤖
-                </div>
-
-                <div>
-
-                    <strong>
-                        BudgetBasics Assistant
-                    </strong>
-
-                    <small>
-                        Online • Ready to help
-                    </small>
-
-                </div>
+                <input
+                    type="email"
+                    id="loginEmail"
+                    placeholder="Enter your email"
+                    required>
 
             </div>
 
+            <div class="form-group">
 
-            <div class="ai-preview-body">
+                <label>Password</label>
 
-
-                <div class="preview-message">
-
-                    Hi! I'm here to help you understand
-                    budgeting and saving.
-
-                </div>
-
-
-                <div class="preview-message user">
-
-                    How should I start a budget?
-
-                </div>
-
-
-                <div class="preview-message">
-
-                    Start by writing down your income,
-                    essential expenses and savings goal.
-                    Then decide how much remains for
-                    flexible spending.
-
-                </div>
-
-
-                <div class="ai-suggestions">
-
-                    <span onclick="quickQuestion('How do I save money?')">
-                        How do I save?
-                    </span>
-
-                    <span onclick="quickQuestion('Explain budgeting')">
-                        Explain budgeting
-                    </span>
-
-                    <span onclick="quickQuestion('What are needs and wants?')">
-                        Needs vs wants
-                    </span>
-
-                </div>
-
+                <input
+                    type="password"
+                    id="loginPassword"
+                    placeholder="Enter your password"
+                    required>
 
             </div>
 
-        </div>
+            <button class="primary-btn" type="submit">
+                Login
+            </button>
 
+            <div class="auth-message" id="loginMessage"></div>
 
-    </div>
+        </form>
 
-</div>
+        <form class="auth-form" id="signupForm">
 
-</section>
+            <div class="form-group">
 
-
-
-<!-- =====================================================
-     CTA
-===================================================== -->
-
-<section class="cta" id="start">
-
-<div class="container">
-
-<div class="cta-box reveal">
-
-    <h2>
-        Start building better money habits.
-    </h2>
-
-    <p>
-        Learn the basics, practice what you learn
-        and become more confident with everyday
-        financial decisions.
-    </p>
-
-    <a href="#topics" class="btn">
-        Explore BudgetBasics →
-    </a>
-
-</div>
-
-</div>
-
-</section>
-
-
-
-<!-- =====================================================
-     FOOTER
-===================================================== -->
-
-<footer>
-
-<div class="container">
-
-
-<div class="footer-grid">
-
-
-    <div class="footer-brand">
-
-        <a href="#home" class="logo">
-
-            <div class="logo-mark">
-                ₦
-            </div>
-
-            <div>
-                Budget<span>Basics</span>
-            </div>
-
-        </a>
-
-
-        <p>
-            A simple educational platform helping
-            students build practical budgeting,
-            saving and responsible spending habits.
-        </p>
-
-    </div>
-
-
-
-    <div>
-
-        <div class="footer-heading">
-            LEARN
-        </div>
-
-        <div class="footer-links">
-
-            <a href="#topics">
-                Budgeting
-            </a>
-
-            <a href="#topics">
-                Saving
-            </a>
-
-            <a href="#topics">
-                Smart Spending
-            </a>
-
-            <a href="#learning">
-                Financial Planning
-            </a>
-
-        </div>
-
-    </div>
-
-
-
-    <div>
-
-        <div class="footer-heading">
-            PLATFORM
-        </div>
-
-        <div class="footer-links">
-
-            <a href="#home">
-                Home
-            </a>
-
-            <a href="#learning">
-                Lessons
-            </a>
-
-            <a href="#assistant">
-                AI Assistant
-            </a>
-
-            <a href="#start">
-                Get Started
-            </a>
-
-        </div>
-
-    </div>
-
-
-
-    <!-- FOOTER AI -->
-
-    <div>
-
-        <div class="footer-heading">
-            ASK BUDGETBASICS AI
-        </div>
-
-
-        <div class="footer-ai">
-
-            <div class="footer-ai-title">
-
-                <span class="online-dot"></span>
-
-                <strong>
-                    Your Money Assistant
-                </strong>
-
-            </div>
-
-
-            <p>
-                Ask a quick question about budgeting,
-                saving or responsible spending.
-            </p>
-
-
-            <div class="footer-ai-input">
+                <label>Full Name</label>
 
                 <input
                     type="text"
-                    id="footerQuestion"
-                    placeholder="Ask a question..."
-                    onkeydown="footerEnter(event)"
-                >
+                    id="signupName"
+                    placeholder="Enter your full name"
+                    required>
 
-                <button onclick="askFooterAI()">
-                    →
-                </button>
+            </div>
+
+            <div class="form-group">
+
+                <label>Email</label>
+
+                <input
+                    type="email"
+                    id="signupEmail"
+                    placeholder="Enter your email"
+                    required>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Password</label>
+
+                <input
+                    type="password"
+                    id="signupPassword"
+                    placeholder="Create a password"
+                    required>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Confirm Password</label>
+
+                <input
+                    type="password"
+                    id="signupConfirm"
+                    placeholder="Confirm your password"
+                    required>
+
+            </div>
+
+            <button class="primary-btn" type="submit">
+                Create Account
+            </button>
+
+            <div class="auth-message" id="signupMessage"></div>
+
+        </form>
+
+        <button class="back-btn" onclick="showWelcome()">
+            ← Back to Start
+        </button>
+
+    </div>
+
+</section>
+
+<section class="screen setup-screen" id="setupScreen">
+
+    <div class="setup-box">
+
+        <div class="setup-logo">BudgetBasics</div>
+
+        <h2 class="setup-title">
+            Let's set up your budget
+        </h2>
+
+        <p class="setup-subtitle">
+            Answer a few simple questions so BudgetBasics
+            can personalize your experience.
+        </p>
+
+        <div class="progress-wrap">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+
+        <form id="setupForm">
+
+            <div class="setup-step active" data-step="1">
+
+                <div class="question-number">
+                    Question 1 of 5
+                </div>
+
+                <h3 class="question-title">
+                    What do you mainly need budgeting for?
+                </h3>
+
+                <div class="option-grid">
+
+                    <div class="option">
+                        <input
+                            type="radio"
+                            name="purpose"
+                            id="school"
+                            value="School">
+                        <label for="school">🎓 School</label>
+                    </div>
+
+                    <div class="option">
+                        <input
+                            type="radio"
+                            name="purpose"
+                            id="food"
+                            value="Food">
+                        <label for="food">🍲 Food</label>
+                    </div>
+
+                    <div class="option">
+                        <input
+                            type="radio"
+                            name="purpose"
+                            id="transport"
+                            value="Transportation">
+                        <label for="transport">🚗 Transportation</label>
+                    </div>
+
+                    <div class="option">
+                        <input
+                            type="radio"
+                            name="purpose"
+                            id="personal"
+                            value="Personal Expenses">
+                        <label for="personal">🛍️ Personal Expenses</label>
+                    </div>
+
+                    <div class="option">
+                        <input
+                            type="radio"
+                            name="purpose"
+                            id="business"
+                            value="Business">
+                        <label for="business">💼 Business</label>
+                    </div>
+
+                    <div class="option">
+                        <input
+                            type="radio"
+                            name="purpose"
+                            id="savings"
+                            value="General Savings">
+                        <label for="savings">💰 General Savings</label>
+                    </div>
+
+                </div>
+
+                <div class="setup-error">
+                    Please select an option.
+                </div>
+
+                <div class="setup-actions">
+                    <button
+                        type="button"
+                        class="next-btn"
+                        onclick="nextStep()">
+                        Continue
+                    </button>
+                </div>
+
+            </div>
+
+            <div class="setup-step" data-step="2">
+
+                <div class="question-number">
+                    Question 2 of 5
+                </div>
+
+                <h3 class="question-title">
+                    How much money do you currently have available?
+                </h3>
+
+                <input
+                    class="setup-input"
+                    type="number"
+                    id="budgetAmount"
+                    min="0"
+                    placeholder="Example: 50000">
+
+                <div class="setup-error">
+                    Please enter your budget amount.
+                </div>
+
+                <div class="setup-actions">
+
+                    <button
+                        type="button"
+                        class="previous-btn"
+                        onclick="previousStep()">
+                        Back
+                    </button>
+
+                    <button
+                        type="button"
+                        class="next-btn"
+                        onclick="nextStep()">
+                        Continue
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="setup-step" data-step="3">
+
+                <div class="question-number">
+                    Question 3 of 5
+                </div>
+
+                <h3 class="question-title">
+                    What is your savings goal?
+                </h3>
+
+                <input
+                    class="setup-input"
+                    type="number"
+                    id="savingsGoal"
+                    min="0"
+                    placeholder="Example: 100000">
+
+                <div class="setup-error">
+                    Please enter your savings goal.
+                </div>
+
+                <div class="setup-actions">
+
+                    <button
+                        type="button"
+                        class="previous-btn"
+                        onclick="previousStep()">
+                        Back
+                    </button>
+
+                    <button
+                        type="button"
+                        class="next-btn"
+                        onclick="nextStep()">
+                        Continue
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="setup-step" data-step="4">
+
+                <div class="question-number">
+                    Question 4 of 5
+                </div>
+
+                <h3 class="question-title">
+                    How often do you receive money?
+                </h3>
+
+                <div class="option-grid">
+
+                    <div class="option">
+                        <input
+                            type="radio"
+                            name="frequency"
+                            id="daily"
+                            value="Daily">
+                        <label for="daily">Every Day</label>
+                    </div>
+
+                    <div class="option">
+                        <input
+                            type="radio"
+                            name="frequency"
+                            id="weekly"
+                            value="Weekly">
+                        <label for="weekly">Every Week</label>
+                    </div>
+
+                    <div class="option">
+                        <input
+                            type="radio"
+                            name="frequency"
+                            id="monthly"
+                            value="Monthly">
+                        <label for="monthly">Every Month</label>
+                    </div>
+
+                    <div class="option">
+                        <input
+                            type="radio"
+                            name="frequency"
+                            id="irregular"
+                            value="Irregularly">
+                        <label for="irregular">Irregularly</label>
+                    </div>
+
+                </div>
+
+                <div class="setup-error">
+                    Please select how often you receive money.
+                </div>
+
+                <div class="setup-actions">
+
+                    <button
+                        type="button"
+                        class="previous-btn"
+                        onclick="previousStep()">
+                        Back
+                    </button>
+
+                    <button
+                        type="button"
+                        class="next-btn"
+                        onclick="nextStep()">
+                        Continue
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="setup-step" data-step="5">
+
+                <div class="question-number">
+                    Question 5 of 5
+                </div>
+
+                <h3 class="question-title">
+                    What would you like BudgetBasics to help you with?
+                </h3>
+
+                <div class="option-grid">
+
+                    <div class="option">
+                        <input
+                            type="radio"
+                            name="help"
+                            id="helpBudget"
+                            value="Creating a budget">
+                        <label for="helpBudget">📊 Creating a budget</label>
+                    </div>
+
+                    <div class="option">
+                        <input
+                            type="radio"
+                            name="help"
+                            id="helpSave"
+                            value="Saving money">
+                        <label for="helpSave">💰 Saving money</label>
+                    </div>
+
+                    <div class="option">
+                        <input
+                            type="radio"
+                            name="help"
+                            id="helpSpend"
+                            value="Controlling spending">
+                        <label for="helpSpend">🛒 Controlling spending</label>
+                    </div>
+
+                    <div class="option">
+                        <input
+                            type="radio"
+                            name="help"
+                            id="helpLearn"
+                            value="Learning personal finance">
+                        <label for="helpLearn">📚 Learning finance</label>
+                    </div>
+
+                </div>
+
+                <div class="setup-error">
+                    Please choose what you want help with.
+                </div>
+
+                <div class="setup-actions">
+
+                    <button
+                        type="button"
+                        class="previous-btn"
+                        onclick="previousStep()">
+                        Back
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="next-btn">
+                        Finish Setup
+                    </button>
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</section>
+
+<section class="success-screen" id="successScreen">
+
+    <div class="success-box">
+
+        <div class="success-icon">
+            ✓
+        </div>
+
+        <h2>You're all set!</h2>
+
+        <p>
+            Your BudgetBasics profile has been created.
+            Your budget information is now ready on your dashboard.
+        </p>
+
+        <button
+            class="start-btn"
+            onclick="openMainApp()">
+            Go to BudgetBasics
+        </button>
+
+    </div>
+
+</section>
+
+<div id="Home">
+
+<header>
+
+    <nav class="navbar">
+
+        <a href="#home" class="nav-logo">
+            Budget<span>Basics</span>
+        </a>
+
+        <div class="nav-links" id="navbar">
+
+            <a href="#home">Home</a>
+
+            <a href="./learn-budgeting.html">Learn Budgeting</a>
+
+            <a href="./needs-vs-wants.html">needs vs wants</a>
+
+            <a href="#ai">AI Assistant</a>
+
+            <a href="#help">Get Help</a>
+
+            <a href="./savings-goals.html" class="nav-start">
+                savings-goal
+            </a>
+
+        </div>
+
+        <button
+            class="menu-btn"
+            onclick="toggleMenu()">
+            ☰
+        </button>
+
+    </nav>
+
+</header>
+
+<section class="hero" id="home">
+
+    <div class="hero-container">
+
+        <div>
+
+            <div class="hero-tag">
+                Welcome to BudgetBasics
+            </div>
+
+            <h1>
+                Build better
+                <span>money habits.</span>
+            </h1>
+
+            <p>
+                Take control of your money with simple budgeting,
+                saving and spending tools designed to help you
+                make smarter financial decisions.
+            </p>
+
+            <div class="hero-buttons">
+
+                <!-- Start Now always opens the Login / Sign Up screen. -->
+                <a href="#" class="hero-btn" onclick="showAuth(); return false;">
+                    Start Now
+                </a>
+
+                <a href="#ai" class="hero-btn secondary">
+                    Ask AI Assistant
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="dashboard-card">
+
+            <div class="dashboard-top">
+
+                <div>
+                    <div class="dashboard-title">
+                        Available Budget
+                    </div>
+
+                    <div
+                        class="dashboard-balance"
+                        id="dashboardBalance">
+                        ₦0
+                    </div>
+                </div>
+
+                <div class="balance-change">
+                    Ready
+                </div>
+
+            </div>
+
+            <div class="chart">
+
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+
+            </div>
+
+            <div class="transactions">
+
+                <div class="transaction">
+
+                    <div class="transaction-left">
+
+                        <div class="transaction-icon">
+                            🍲
+                        </div>
+
+                        <div>
+                            <div class="transaction-name">
+                                Food
+                            </div>
+
+                            <div class="transaction-date">
+                                Budget category
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="transaction-price">
+                        <span id="dashboardPurpose">
+                            Your Goal
+                        </span>
+                    </div>
+
+                </div>
+
+                <div class="transaction">
+
+                    <div class="transaction-left">
+
+                        <div class="transaction-icon">
+                            💰
+                        </div>
+
+                        <div>
+                            <div class="transaction-name">
+                                Savings Goal
+                            </div>
+
+                            <div class="transaction-date">
+                                Target
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div
+                        class="transaction-price"
+                        id="dashboardSavings">
+                        ₦0
+                    </div>
+
+                </div>
 
             </div>
 
@@ -4172,521 +2129,871 @@ footer::before{
 
     </div>
 
+</section>
 
-</div>
+<section class="trust">
 
+    <div class="trust-inner">
 
+        <div class="trust-item">
+            <strong>100%</strong>
+            <span>Beginner Friendly</span>
+        </div>
 
-<div class="footer-bottom">
+        <div class="trust-item">
+            <strong>24/7</strong>
+            <span>Learning Access</span>
+        </div>
 
-    <span>
-        © 2026 BudgetBasics. All rights reserved.
-    </span>
+        <div class="trust-item">
+            <strong>Simple</strong>
+            <span>Money Education</span>
+        </div>
 
-    <span>
-        Learn • Save • Grow
-    </span>
+    </div>
 
-</div>
+</section>
 
+<section class="section">
 
-</div>
+    <div class="section-container">
+
+        <div class="section-heading">
+
+            <small>Your Setup</small>
+
+            <h2>
+                Your money plan
+            </h2>
+
+            <p>
+                Here is the information you provided during setup.
+            </p>
+
+        </div>
+
+        <div class="personal-card">
+
+            <div class="personal-item">
+
+                <small>Name</small>
+
+                <strong id="profileName">
+                    User
+                </strong>
+
+            </div>
+
+            <div class="personal-item">
+
+                <small>Budget Purpose</small>
+
+                <strong id="profilePurpose">
+                    —
+                </strong>
+
+            </div>
+
+            <div class="personal-item">
+
+                <small>Money Frequency</small>
+
+                <strong id="profileFrequency">
+                    —
+                </strong>
+
+            </div>
+
+            <div class="personal-item">
+
+                <small>Main Goal</small>
+
+                <strong id="profileHelp">
+                    —
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="section" id="topics">
+
+    <div class="section-container">
+
+        <div class="section-heading center">
+
+            <small>What You Can Do</small>
+
+            <h2>
+                Simple tools for better money habits
+            </h2>
+
+            <p>
+                BudgetBasics gives you simple ways to understand
+                and manage your personal finances.
+            </p>
+
+        </div>
+
+        <div class="feature-grid">
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    📊
+                </div>
+
+                <h3>Budgeting</h3>
+
+                <p>
+                    Learn how to create a realistic budget and
+                    understand where your money goes.
+                </p>
+
+            </div>
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    💰
+                </div>
+
+                <h3>Saving</h3>
+
+                <p>
+                    Set savings goals and learn practical ways
+                    to build your savings over time.
+                </p>
+
+            </div>
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    🛒
+                </div>
+
+                <h3>Smart Spending</h3>
+
+                <p>
+                    Learn how to separate needs from wants and
+                    make more thoughtful spending decisions.
+                </p>
+
+            </div>
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    🧮
+                </div>
+
+                <h3>Money Tools</h3>
+
+                <p>
+                    Use simple financial calculations and
+                    educational tools to understand your money.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="section lessons" id="learn">
+
+    <div class="section-container">
+
+        <div class="section-heading center">
+
+            <small>Learn</small>
+
+            <h2>
+                Start with the basics
+            </h2>
+
+            <p>
+                Build your financial knowledge one lesson at a time.
+            </p>
+
+        </div>
+
+        <div class="lesson-grid">
+
+            <div class="lesson">
+
+                <div class="lesson-number">
+                    LESSON 01
+                </div>
+
+                <h3>
+                    Understanding a Budget
+                </h3>
+
+                <p>
+                    Learn what a budget is, why it matters and
+                    how to create one that works for you.
+                </p>
+
+            </div>
+
+            <div class="lesson">
+
+                <div class="lesson-number">
+                    LESSON 02
+                </div>
+
+                <h3>
+                    Needs vs Wants
+                </h3>
+
+                <p>
+                    Understand the difference between essential
+                    expenses and things you simply want.
+                </p>
+
+            </div>
+
+            <div class="lesson">
+
+                <div class="lesson-number">
+                    LESSON 03
+                </div>
+
+                <h3>
+                    Building Savings
+                </h3>
+
+                <p>
+                    Discover simple strategies for setting goals
+                    and building your savings consistently.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="stats">
+
+    <div class="stats-grid">
+
+        <div class="stat">
+
+            <h3>4+</h3>
+
+            <p>
+                Financial Topics
+            </p>
+
+        </div>
+
+        <div class="stat">
+
+            <h3>10+</h3>
+
+            <p>
+                Learning Concepts
+            </p>
+
+        </div>
+
+        <div class="stat">
+
+            <h3>24/7</h3>
+
+            <p>
+                Access
+            </p>
+
+        </div>
+
+        <div class="stat">
+
+            <h3>1</h3>
+
+            <p>
+                Simple Goal
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="section ai-section" id="ai">
+
+    <div class="ai-box">
+
+        <div>
+
+            <small style="color:#19a463;font-weight:900;">
+                AI ASSISTANT
+            </small>
+
+            <h2>
+                Have a money question?
+            </h2>
+
+            <p>
+                Ask BudgetBasics simple financial education
+                questions and get instant explanations.
+            </p>
+
+            <br>
+
+            <button
+                class="hero-btn"
+                onclick="openChat()">
+                Open AI Assistant
+            </button>
+
+        </div>
+
+        <div class="ai-preview">
+
+            <div class="ai-message">
+                How can I start saving money?
+            </div>
+
+            <div class="ai-message user">
+                I want to save but my income is small.
+            </div>
+
+            <div class="ai-message">
+                Start with a small amount that you can
+                consistently set aside.
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- Get Help: quick support options available after sign-in. -->
+<section class="section help-section" id="help">
+    <div class="section-container">
+        <div class="section-heading center">
+            <small>Get Help</small>
+            <h2>Need a little help?</h2>
+            <p>Choose what you need and BudgetBasics will take you to the right place.</p>
+        </div>
+
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">💬</div>
+                <h3>Ask the AI Assistant</h3>
+                <p>Get simple explanations about budgeting, saving, spending and financial goals.</p>
+                <button class="hero-btn" onclick="openChat()">Open Help Chat</button>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">📚</div>
+                <h3>Learn the Basics</h3>
+                <p>Review beginner-friendly lessons when you want to understand a money topic.</p>
+                <a href="#learn" class="hero-btn">View Lessons</a>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">⚙️</div>
+                <h3>Update Your Plan</h3>
+                <p>Change your budget setup whenever your goals or circumstances change.</p>
+                <a href="#" class="hero-btn secondary" onclick="showSetupAgain(event)">Update Budget</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cta" id="start">
+
+    <h2>
+        Keep building better money habits.
+    </h2>
+
+    <p>
+        Continue learning, review your goals and use
+        BudgetBasics to improve your understanding of personal finance.
+    </p>
+
+    <button
+        class="start-btn"
+        onclick="openChat()">
+        Ask the AI Assistant
+    </button>
+
+</section>
+
+<footer>
+
+    <div class="footer-container">
+
+        <div class="footer-grid">
+
+            <div class="footer-column">
+
+                <div class="footer-brand">
+                    Budget<span>Basics</span>
+                </div>
+
+                <p>
+                    Simple financial education for people who
+                    want to understand budgeting, saving and
+                    smarter spending.
+                </p>
+
+            </div>
+
+            <div class="footer-column">
+
+                <h4>Explore</h4>
+
+                <a href="#home">Home</a>
+
+                <a href="#learn">Learn</a>
+
+                <a href="#topics">Topics</a>
+
+                <a href="#ai">AI Assistant</a>
+
+            </div>
+
+            <div class="footer-column">
+
+                <h4>Learn</h4>
+
+                <a href="#topics">Budgeting</a>
+
+                <a href="#topics">Saving</a>
+
+                <a href="#topics">Spending</a>
+
+                <a href="#learn">Lessons</a>
+
+            </div>
+
+            <div class="footer-column">
+
+                <h4>Your Account</h4>
+
+                <a href="#" onclick="showSetupAgain(event)">
+                    Update Budget
+                </a>
+
+                <a href="#" onclick="logout(event)">
+                    Log Out
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+
+            <span>
+                © 2026 BudgetBasics. All rights reserved.
+            </span>
+
+            <span>
+                Build better money habits.
+            </span>
+
+        </div>
+
+    </div>
 
 </footer>
 
+<div class="ai-floating">
 
+    <div class="chat-window" id="chatWindow">
 
-<!-- =====================================================
-     FLOATING CHAT
-===================================================== -->
+        <div class="chat-header">
 
-<button
-    class="chat-toggle"
-    id="chatToggle"
-    onclick="openChat()"
-    aria-label="Open BudgetBasics AI"
->
-    🤖
-</button>
+            <strong>BudgetBasics AI</strong>
 
+            <button onclick="closeChat()">
+                ✕
+            </button>
 
+        </div>
 
-<!-- =====================================================
-     CHAT WINDOW
-===================================================== -->
+        <div
+            class="chat-body"
+            id="chatBody">
 
-<div class="chat-window" id="chatWindow">
-
-
-    <div class="chat-head">
-
-        <div class="chat-profile">
-
-            <div class="chat-profile-icon">
-                🤖
-            </div>
-
-            <div>
-
-                <strong>
-                    BudgetBasics AI
-                </strong>
-
-                <small>
-                    Online • Financial learning assistant
-                </small>
-
+            <div class="ai-message">
+                Hi! Ask me a simple budgeting or saving question.
             </div>
 
         </div>
 
+        <div class="chat-input">
 
-        <button
-            class="close-chat"
-            onclick="closeChat()"
-        >
-            ×
-        </button>
+            <input
+                type="text"
+                id="chatInput"
+                placeholder="Ask a question..."
+                onkeydown="chatEnter(event)">
 
-    </div>
-
-
-
-    <div class="chat-messages" id="chatMessages">
-
-        <div class="chat-message bot">
-
-            Hello! 👋 I'm your BudgetBasics Assistant.
-            I can explain budgeting, saving, spending
-            and other basic money concepts.
+            <button onclick="sendChat()">
+                Send
+            </button>
 
         </div>
 
     </div>
 
-
-
-    <div class="chat-input">
-
-        <input
-            type="text"
-            id="chatInput"
-            placeholder="Ask your question..."
-            onkeydown="chatEnter(event)"
-        >
-
-        <button onclick="sendChat()">
-            Send
-        </button>
-
-    </div>
-
+    <button
+        class="ai-button"
+        onclick="openChat()">
+        💬
+    </button>
 
 </div>
 
-
+</div>
 
 <script>
 
-/* =====================================================
-   MOBILE NAVIGATION
-===================================================== */
+function hideAllScreens(){
+    document.querySelectorAll(".screen").forEach(screen=>{
+        screen.classList.remove("active");
+    });
+    document.getElementById("successScreen").classList.remove("active");
+}
+
+function showWelcome(){
+    hideAllScreens();
+    document.getElementById("welcomeScreen").classList.add("active");
+}
+
+function showAuth(){
+    hideAllScreens();
+    document.getElementById("authScreen").classList.add("active");
+}
+
+function showSetup(){
+    hideAllScreens();
+    document.getElementById("setupScreen").classList.add("active");
+}
+
+function showSuccess(){
+    hideAllScreens();
+    document.getElementById("successScreen").classList.add("active");
+}
+
+function switchAuth(type){
+    const loginTab = document.getElementById("loginTab");
+    const signupTab = document.getElementById("signupTab");
+    const loginForm = document.getElementById("loginForm");
+    const signupForm = document.getElementById("signupForm");
+    const loginMessage = document.getElementById("loginMessage");
+    const signupMessage = document.getElementById("signupMessage");
+    loginMessage.className="auth-message";
+    signupMessage.className="auth-message";
+    if(type==="login"){
+        loginTab.classList.add("active");
+        signupTab.classList.remove("active");
+        loginForm.classList.add("active");
+        signupForm.classList.remove("active");
+    }else{
+        signupTab.classList.add("active");
+        loginTab.classList.remove("active");
+        signupForm.classList.add("active");
+        loginForm.classList.remove("active");
+    }
+}
+
+// Create an account, then take the user directly to the landing page.
+document.getElementById("signupForm").addEventListener("submit",function(e){
+    e.preventDefault();
+    const name = document.getElementById("signupName").value.trim();
+    const email = document.getElementById("signupEmail").value.trim();
+    const password = document.getElementById("signupPassword").value;
+    const confirm = document.getElementById("signupConfirm").value;
+    const message = document.getElementById("signupMessage");
+    if(password !== confirm){
+        message.textContent = "Passwords do not match.";
+        message.className = "auth-message error";
+        return;
+    }
+    if(password.length < 6){
+        message.textContent = "Password must contain at least 6 characters.";
+        message.className = "auth-message error";
+        return;
+    }
+    const account = { name:name, email:email, password:password };
+    localStorage.setItem("budgetbasicsAccount", JSON.stringify(account));
+    localStorage.setItem("budgetbasicsLoggedIn", "true");
+    message.textContent = "Account created successfully.";
+    message.className = "auth-message success";
+    setTimeout(()=>{ openMainApp(); },700);
+});
+
+// Successful login goes straight to the landing page.
+document.getElementById("loginForm").addEventListener("submit",function(e){
+    e.preventDefault();
+    const email = document.getElementById("loginEmail").value.trim();
+    const password = document.getElementById("loginPassword").value;
+    const message = document.getElementById("loginMessage");
+    const savedAccount = JSON.parse(localStorage.getItem("budgetbasicsAccount"));
+    if(!savedAccount){
+        message.textContent = "No account found. Please create an account first.";
+        message.className = "auth-message error";
+        return;
+    }
+    if(email === savedAccount.email && password === savedAccount.password){
+        localStorage.setItem("budgetbasicsLoggedIn", "true");
+        message.textContent = "Login successful.";
+        message.className = "auth-message success";
+        setTimeout(()=>{ openMainApp(); },700);
+    }else{
+        message.textContent = "Incorrect email or password.";
+        message.className = "auth-message error";
+    }
+});
+
+let currentStep = 1;
+const totalSteps = 5;
+
+function getCurrentStep(){
+    return document.querySelector(`.setup-step[data-step="${currentStep}"]`);
+}
+
+function validateStep(){
+    const step = getCurrentStep();
+    const error = step.querySelector(".setup-error");
+    let valid = true;
+    if(currentStep === 1){
+        valid = document.querySelector('input[name="purpose"]:checked') !== null;
+    }
+    if(currentStep === 2){
+        valid = document.getElementById("budgetAmount").value.trim() !== "";
+    }
+    if(currentStep === 3){
+        valid = document.getElementById("savingsGoal").value.trim() !== "";
+    }
+    if(currentStep === 4){
+        valid = document.querySelector('input[name="frequency"]:checked') !== null;
+    }
+    if(currentStep === 5){
+        valid = document.querySelector('input[name="help"]:checked') !== null;
+    }
+    if(!valid){
+        error.style.display="block";
+    }else{
+        error.style.display="none";
+    }
+    return valid;
+}
+
+function updateProgress(){
+    const percent = (currentStep / totalSteps) * 100;
+    document.getElementById("progressBar").style.width = percent + "%";
+}
+
+function showSetupStep(){
+    document.querySelectorAll(".setup-step").forEach(step=>{
+        step.classList.remove("active");
+    });
+    document.querySelector(`.setup-step[data-step="${currentStep}"]`).classList.add("active");
+    updateProgress();
+}
+
+function nextStep(){
+    if(!validateStep()){
+        return;
+    }
+    if(currentStep < totalSteps){
+        currentStep++;
+        showSetupStep();
+    }
+}
+
+function previousStep(){
+    if(currentStep > 1){
+        currentStep--;
+        showSetupStep();
+    }
+}
+
+document.getElementById("setupForm").addEventListener("submit",function(e){
+    e.preventDefault();
+    if(!validateStep()){
+        return;
+    }
+    const account = JSON.parse(localStorage.getItem("budgetbasicsAccount"));
+    const purpose = document.querySelector('input[name="purpose"]:checked').value;
+    const budget = Number(document.getElementById("budgetAmount").value);
+    const savings = Number(document.getElementById("savingsGoal").value);
+    const frequency = document.querySelector('input[name="frequency"]:checked').value;
+    const help = document.querySelector('input[name="help"]:checked').value;
+    const profile = {
+        name:account ? account.name : "User",
+        purpose:purpose,
+        budget:budget,
+        savings:savings,
+        frequency:frequency,
+        help:help
+    };
+    localStorage.setItem("budgetbasicsProfile", JSON.stringify(profile));
+    showSuccess();
+});
+
+function openMainApp(){
+    document.getElementById("welcomeScreen").classList.remove("active");
+    document.getElementById("authScreen").classList.remove("active");
+    document.getElementById("setupScreen").classList.remove("active");
+    document.getElementById("successScreen").classList.remove("active");
+    document.getElementById("Home").classList.add("active");
+    loadProfile();
+    window.scrollTo({ top:0, behavior:"smooth" });
+}
+
+function loadProfile(){
+    // Use the signed-in person's saved account details on the landing page.
+    const account = JSON.parse(localStorage.getItem("budgetbasicsAccount") || "null");
+    const profile = JSON.parse(localStorage.getItem("budgetbasicsProfile") || "null");
+
+    const name = (profile && profile.name) || (account && account.name) || "User";
+    document.getElementById("profileName").textContent = name;
+    document.getElementById("profilePurpose").textContent = (profile && profile.purpose) || "Not set yet";
+    document.getElementById("profileFrequency").textContent = (profile && profile.frequency) || "Not set yet";
+    document.getElementById("profileHelp").textContent = (profile && profile.help) || "Not set yet";
+    document.getElementById("dashboardBalance").textContent = formatMoney(profile ? profile.budget : 0);
+    document.getElementById("dashboardSavings").textContent = formatMoney(profile ? profile.savings : 0);
+    document.getElementById("dashboardPurpose").textContent = (profile && profile.purpose) || "Your Goal";
+}
+
+function formatMoney(amount){
+    return "₦" + Number(amount || 0).toLocaleString("en-NG");
+}
+
+function showSetupAgain(event){
+    event.preventDefault();
+    currentStep = 1;
+    showSetup();
+}
+
+// Log the current user out and return to the Start Now screen.
+// The saved account stays in localStorage so the person can log in again.
+function logout(event){
+    if(event){
+        event.preventDefault();
+    }
+
+    localStorage.removeItem("budgetbasicsLoggedIn");
+
+    // Hide the landing page and every other screen before showing Start Now.
+    hideAllScreens();
+    const home = document.getElementById("Home");
+    if(home){
+        home.classList.remove("active");
+    }
+
+    showWelcome();
+    window.scrollTo({ top:0, behavior:"smooth" });
+}
 
 function toggleMenu(){
-
-    document
-        .getElementById("navLinks")
-        .classList.toggle("active");
-
+    document.getElementById("navbar").classList.toggle("active");
 }
-
-
-document
-    .querySelectorAll(".nav-links a")
-    .forEach(function(link){
-
-        link.addEventListener("click",function(){
-
-            document
-                .getElementById("navLinks")
-                .classList.remove("active");
-
-        });
-
-    });
-
-
-
-/* =====================================================
-   SCROLL PROGRESS
-===================================================== */
-
-window.addEventListener("scroll",function(){
-
-    const scrollTop =
-        window.scrollY;
-
-    const documentHeight =
-        document.documentElement.scrollHeight
-        - window.innerHeight;
-
-    const progress =
-        (scrollTop / documentHeight) * 100;
-
-    document
-        .getElementById("scrollProgress")
-        .style.width = progress + "%";
-
-});
-
-
-
-/* =====================================================
-   SCROLL REVEAL
-===================================================== */
-
-const revealElements =
-    document.querySelectorAll(
-        ".reveal, .reveal-left, .reveal-right"
-    );
-
-
-const revealObserver =
-    new IntersectionObserver(
-
-        function(entries){
-
-            entries.forEach(function(entry){
-
-                if(entry.isIntersecting){
-
-                    entry.target.classList.add("active");
-
-                    revealObserver.unobserve(
-                        entry.target
-                    );
-
-                }
-
-            });
-
-        },
-
-        {
-            threshold:.12
-        }
-
-    );
-
-
-revealElements.forEach(function(element){
-
-    revealObserver.observe(element);
-
-});
-
-
-
-/* =====================================================
-   CHAT OPEN / CLOSE
-===================================================== */
 
 function openChat(){
-
-    document
-        .getElementById("chatWindow")
-        .classList.add("active");
-
-    document
-        .getElementById("chatToggle")
-        .style.display = "none";
-
-    setTimeout(function(){
-
-        document
-            .getElementById("chatInput")
-            .focus();
-
-    },150);
-
+    document.getElementById("chatWindow").classList.add("active");
 }
-
 
 function closeChat(){
-
-    document
-        .getElementById("chatWindow")
-        .classList.remove("active");
-
-    document
-        .getElementById("chatToggle")
-        .style.display = "block";
-
+    document.getElementById("chatWindow").classList.remove("active");
 }
-
-
-
-/* =====================================================
-   ADD CHAT MESSAGE
-===================================================== */
 
 function addChatMessage(text,type){
-
-    const container =
-        document.getElementById("chatMessages");
-
-    const message =
-        document.createElement("div");
-
-    message.className =
-        "chat-message " + type;
-
+    const body = document.getElementById("chatBody");
+    const message = document.createElement("div");
+    message.className = "ai-message" + (type === "user" ? " user" : "");
     message.textContent = text;
-
-    container.appendChild(message);
-
-    container.scrollTop =
-        container.scrollHeight;
-
+    body.appendChild(message);
+    body.scrollTop = body.scrollHeight;
 }
-
-
-
-/* =====================================================
-   BUDGETBASICS AI
-===================================================== */
 
 function getAssistantResponse(question){
-
-    const q =
-        question.toLowerCase();
-
-
-    if(
-        q.includes("budget") ||
-        q.includes("budgeting")
-    ){
-
-        return "A good beginner budget starts with four things: your income, essential expenses, savings and flexible spending. Write them down and make sure your planned spending does not exceed your available income.";
-
+    const q = question.toLowerCase();
+    if(q.includes("budget") || q.includes("budgeting")){
+        return "A budget is a simple plan for how you will use your money. Start by listing your income, essential expenses, savings and flexible spending.";
     }
-
-
-    if(
-        q.includes("save") ||
-        q.includes("saving")
-    ){
-
-        return "Start with a realistic savings target. Even a small amount saved consistently can help you develop a strong saving habit. Give your goal a specific amount and deadline.";
-
+    if(q.includes("save") || q.includes("saving")){
+        return "Start with an amount you can consistently save. Even a small amount can become meaningful when you save regularly.";
     }
-
-
-    if(
-        q.includes("spend") ||
-        q.includes("spending")
-    ){
-
-        return "Before buying something, ask whether it is a need or a want. You can also include a spending limit in your budget so you know how much you can safely spend.";
-
+    if(q.includes("spend") || q.includes("spending")){
+        return "Before spending, ask whether something is a need or a want. Tracking your expenses can also help you identify where your money is going.";
     }
-
-
-    if(
-        q.includes("need") ||
-        q.includes("want")
-    ){
-
-        return "A need is something important for everyday living, such as food or necessary transportation. A want is something you would like to have but could live without.";
-
+    if(q.includes("need") && q.includes("want")){
+        return "A need is something essential, such as food or basic transportation. A want is something you would like but can live without.";
     }
-
-
-    if(
-        q.includes("income") ||
-        q.includes("salary") ||
-        q.includes("allowance")
-    ){
-
-        return "Income is money you receive, such as an allowance, salary, business earnings or other legitimate sources. Knowing your income is the first step toward creating a useful budget.";
-
+    if(q.includes("goal")){
+        return "A good financial goal should be specific and measurable. Decide what you want to save for, how much you need and when you want to reach the goal.";
     }
-
-
-    if(
-        q.includes("student")
-    ){
-
-        return "As a student, start small. Track your daily spending, separate needs from wants, set a savings target and review your budget regularly.";
-
-    }
-
-
-    if(
-        q.includes("money") ||
-        q.includes("finance")
-    ){
-
-        return "Good money management usually comes down to knowing what comes in, understanding what goes out, saving intentionally and making thoughtful spending decisions.";
-
-    }
-
-
-    return "That's a useful question. I can help with basic budgeting, saving, spending, income and financial planning. Try asking me something like 'How do I make a budget?'";
-
+    return "I can help explain budgeting, saving, spending, financial goals and basic personal finance concepts. Try asking me one of those questions.";
 }
-
-
-
-/* =====================================================
-   SEND CHAT
-===================================================== */
 
 function sendChat(){
-
-    const input =
-        document.getElementById("chatInput");
-
-    const question =
-        input.value.trim();
-
-
-    if(question === ""){
+    const input = document.getElementById("chatInput");
+    const question = input.value.trim();
+    if(!question){
         return;
     }
-
-
-    addChatMessage(
-        question,
-        "user"
-    );
-
-
-    input.value = "";
-
-
-    setTimeout(function(){
-
-        const response =
-            getAssistantResponse(question);
-
-        addChatMessage(
-            response,
-            "bot"
-        );
-
-    },550);
-
+    addChatMessage(question, "user");
+    input.value="";
+    setTimeout(()=>{
+        addChatMessage(getAssistantResponse(question), "bot");
+    },500);
 }
-
-
-
-/* =====================================================
-   ENTER CHAT
-===================================================== */
 
 function chatEnter(event){
-
     if(event.key === "Enter"){
-
         sendChat();
-
     }
-
 }
 
+window.addEventListener("scroll",function(){
+    const scrollTop = document.documentElement.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+    document.getElementById("scrollProgress").style.width = progress + "%";
+});
 
+document.querySelectorAll(".nav-links a").forEach(link=>{
+    link.addEventListener("click",()=>{
+        document.getElementById("navbar").classList.remove("active");
+    });
+});
 
-/* =====================================================
-   QUICK AI QUESTIONS
-===================================================== */
+// On a fresh visit, show the Start Now welcome screen.
+// Once the user has signed in, keep them on the landing page when they return.
+window.addEventListener("load",function(){
+    const loggedIn = localStorage.getItem("budgetbasicsLoggedIn") === "true";
 
-function quickQuestion(question){
-
-    openChat();
-
-    setTimeout(function(){
-
-        document
-            .getElementById("chatInput")
-            .value = question;
-
-        sendChat();
-
-    },150);
-
-}
-
-
-
-/* =====================================================
-   FOOTER AI
-===================================================== */
-
-function askFooterAI(){
-
-    const input =
-        document.getElementById("footerQuestion");
-
-    const question =
-        input.value.trim();
-
-
-    openChat();
-
-
-    if(question === ""){
-        return;
+    if(loggedIn){
+        openMainApp();
+    }else{
+        document.getElementById("Home").classList.remove("active");
+        showWelcome();
     }
-
-
-    input.value = "";
-
-
-    setTimeout(function(){
-
-        addChatMessage(
-            question,
-            "user"
-        );
-
-
-        setTimeout(function(){
-
-            const response =
-                getAssistantResponse(question);
-
-            addChatMessage(
-                response,
-                "bot"
-            );
-
-        },500);
-
-    },150);
-
-}
-
-
-
-/* =====================================================
-   FOOTER ENTER
-===================================================== */
-
-function footerEnter(event){
-
-    if(event.key === "Enter"){
-
-        askFooterAI();
-
-    }
-
-}
+});
 
 </script>
 
-
 </body>
-
 </html>
-

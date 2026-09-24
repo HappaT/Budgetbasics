@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Savings Goals | BudgetBasics</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="header-inner"><a class="back-link" href="learn-budgeting.html">&#8592; Learn Budgeting</a><button
+                class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-navigation"
+                aria-label="Open navigation"><span></span><span></span><span></span></button>
+            <nav class="site-navigation" id="site-navigation" aria-label="Main navigation"><a class="active"
+                    href="savings-goals.html" aria-current="page">Savings Goals</a><a href="learn-budgeting.html">All
+                    modules</a></nav>
+        </div>
+    </header>
+    <main class="module-page">
+        <section class="module-hero">
+            <p class="eyebrow">Module 02</p>
+            <h1>Savings Goals</h1>
+            <p>Turn a goal into a clear path with a target, a starting point, and a monthly habit.</p>
+        </section>
+        <section class="module-content">
+            <div class="tool-layout">
+                <form class="tool-card" id="savings-form">
+                    <p class="eyebrow">Goal calculator</p>
+                    <h2>Plan your next milestone</h2><label for="goal-name">Goal name</label><input id="goal-name"
+                        type="text" placeholder="Emergency fund"><label for="target-amount">Target amount</label><input
+                        id="target-amount" type="number" min="0" step="0.01" placeholder="1000"><label
+                        for="current-savings">Current savings</label><input id="current-savings" type="number" min="0"
+                        step="0.01" placeholder="250"><label for="monthly-contribution">Monthly
+                        contribution</label><input id="monthly-contribution" type="number" min="0" step="0.01"
+                        placeholder="150"><button class="primary-button" type="submit">Calculate my plan</button>
+                    <p class="form-error" id="savings-error" aria-live="polite"></p>
+                </form>
+                <div class="result-card" id="savings-result" aria-live="polite">
+                    <p class="eyebrow">Your progress</p>
+                    <h2>Enter your numbers to begin</h2>
+                    <div class="progress-track">
+                        <div class="progress-bar" id="savings-progress"></div>
+                    </div>
+                    <p id="savings-summary">Your progress and estimated timeline will appear here.</p>
+                    <p class="tip">Tip: automate your contribution just after payday so saving happens before spending.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>

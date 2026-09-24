@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Needs vs Wants | BudgetBasics</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="header-inner"><a class="back-link" href="learn-budgeting.html">&#8592; Learn Budgeting</a><button
+                class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-navigation"
+                aria-label="Open navigation"><span></span><span></span><span></span></button>
+            <nav class="site-navigation" id="site-navigation" aria-label="Main navigation"><a class="active"
+                    href="needs-vs-wants.html" aria-current="page">Needs vs Wants</a><a href="learn-budgeting.html">All
+                    modules</a></nav>
+        </div>
+    </header>
+    <main class="module-page">
+        <section class="module-hero">
+            <p class="eyebrow">Module 03</p>
+            <h1>Needs vs Wants</h1>
+            <p>Pause before spending and decide whether a purchase supports your essentials or your preferences.</p>
+        </section>
+        <section class="module-content">
+            <div class="concept-grid">
+                <article class="info-card">
+                    <h2>Needs</h2>
+                    <p>Essential costs that support health, safety, work, or school.</p>
+                    <p class="example">Rent, basic groceries, medicine, transport to class</p>
+                </article>
+                <article class="info-card">
+                    <h2>Wants</h2>
+                    <p>Optional purchases that add comfort, fun, or convenience.</p>
+                    <p class="example">Takeout, new headphones, streaming upgrades, décor</p>
+                </article>
+            </div>
+            <div class="classifier-card">
+                <p class="eyebrow">Try it</p>
+                <h2>Classify this item: <span id="item-prompt">A weekly grocery shop</span></h2>
+                <div class="answer-options"><button type="button" data-classification="need">Need</button><button
+                        type="button" data-classification="want">Want</button></div>
+                <p class="feedback" data-classification-feedback aria-live="polite"></p>
+            </div>
+            <div class="decision-guide">
+                <p class="eyebrow">Decision guide</p>
+                <h2>Before you buy a non-essential</h2>
+                <ol>
+                    <li><strong>Pause:</strong> wait 24 hours before buying.</li>
+                    <li><strong>Check:</strong> can you pay without using money for needs?</li>
+                    <li><strong>Choose:</strong> will you still value it next week?</li>
+                    <li><strong>Decide:</strong> buy it only when the answer is a confident yes.</li>
+                </ol>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>
