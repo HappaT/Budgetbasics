@@ -1452,7 +1452,7 @@ footer{
         </p>
 
         <button class="start-btn" onclick="showAuth()">
-            Start Now
+           <a href="./budgeting-basics.html">Start Now</a>
         </button>
 
         <div class="welcome-small">
@@ -2980,8 +2980,7 @@ document.querySelectorAll(".nav-links a").forEach(link=>{
     });
 });
 
-// On a fresh visit, show the Start Now welcome screen.
-// Once the user has signed in, keep them on the landing page when they return.
+// 
 window.addEventListener("load",function(){
     const loggedIn = localStorage.getItem("budgetbasicsLoggedIn") === "true";
 
