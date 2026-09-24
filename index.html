@@ -1395,9 +1395,47 @@ footer{
         font-size:32px;
     }
 
+    .ai-floating{
+        right:12px;
+        bottom:12px;
+    }
+
+    .ai-button{
+        width:56px;
+        height:56px;
+        font-size:20px;
+    }
+
     .chat-window{
-        width:calc(100vw - 30px);
-        right:-5px;
+        position:fixed;
+        left:12px;
+        right:12px;
+        bottom:78px;
+        width:auto;
+        max-width:none;
+        max-height:calc(100dvh - 92px);
+        border-radius:18px;
+    }
+
+    .chat-body{
+        height:min(280px, 45dvh);
+        min-height:180px;
+        padding:12px;
+    }
+
+    .chat-header{
+        padding:14px;
+    }
+
+    .chat-input input{
+        min-width:0;
+        padding:13px 11px;
+        font-size:16px;
+    }
+
+    .chat-input button{
+        padding:0 14px;
+        flex-shrink:0;
     }
 }
 
@@ -1423,6 +1461,34 @@ footer{
 
     .stats-grid{
         grid-template-columns:1fr;
+    }
+
+    .ai-floating{
+        right:10px;
+        bottom:10px;
+    }
+
+    .ai-button{
+        width:52px;
+        height:52px;
+        font-size:19px;
+    }
+
+    .chat-window{
+        left:8px;
+        right:8px;
+        bottom:70px;
+        border-radius:16px;
+        max-height:calc(100dvh - 82px);
+    }
+
+    .chat-body{
+        height:min(250px, 42dvh);
+        min-height:160px;
+    }
+
+    .chat-input button{
+        padding:0 12px;
     }
 }
 </style>
